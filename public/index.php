@@ -29,4 +29,4 @@ $app = new \Slim\App($setting);
 (new Dependency())->register($app);
 
 $app->run();
-echo "hello world";
+
