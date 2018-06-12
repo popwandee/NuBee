@@ -23,9 +23,11 @@ use LINE\LINEBot\KitchenSink\Setting;
 echo "hello world this is before callback.php";
 require_once __DIR__ . '../vendor/autoload.php';
 
+echo "hello world this is middle callback.php";
 $setting = Setting::getSetting();
 $app = new \Slim\App($setting);
 
+echo "hello world this is middle2 callback.php";
 (new Route())->register($app);
 (new Dependency())->register($app);
 
