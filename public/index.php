@@ -14,7 +14,7 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations
  * under the License.
- */
+
 
 use LINE\LINEBot\KitchenSink\Dependency;
 use LINE\LINEBot\KitchenSink\Route;
@@ -30,3 +30,6 @@ $app = new \Slim\App($setting);
 
 $app->run();
 
+ */
+
+ echo "hello world this is callback.php";
