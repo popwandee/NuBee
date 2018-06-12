@@ -82,6 +82,7 @@ class Route
                 if ($event instanceof MessageEvent) {
                     if ($event instanceof TextMessage) {
                         $handler = new TextMessageHandler($bot, $logger, $req, $event);
+                        echo "OK Tex Message";
                     } elseif ($event instanceof StickerMessage) {
                         $handler = new StickerMessageHandler($bot, $logger, $event);
                     } elseif ($event instanceof LocationMessage) {
