@@ -15,7 +15,8 @@
  * License for the specific language governing permissions and limitations
  * under the License.
 
-
+*/
+/*
 use LINE\LINEBot\KitchenSink\Dependency;
 use LINE\LINEBot\KitchenSink\Route;
 use LINE\LINEBot\KitchenSink\Setting;
