@@ -20,6 +20,7 @@ use LINE\LINEBot\KitchenSink\Dependency;
 use LINE\LINEBot\KitchenSink\Route;
 use LINE\LINEBot\KitchenSink\Setting;
 
+echo "hello world this is before callback.php";
 require_once __DIR__ . '../vendor/autoload.php';
 
 $setting = Setting::getSetting();
