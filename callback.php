@@ -16,7 +16,7 @@
  * under the License.
  */
 
-require_once __DIR__.'/vendor/autoload.php';
+require __DIR__."/vendor/autoload.php";
 use LINE\LINEBot\KitchenSink\Dependency;
 use LINE\LINEBot\KitchenSink\Route;
 use LINE\LINEBot\KitchenSink\Setting;
