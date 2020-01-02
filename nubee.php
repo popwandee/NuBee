@@ -67,8 +67,8 @@ use LINE\LINEBot\QuickReplyBuilder\QuickReplyMessageBuilder;
 $logger = new Logger('LineBot');
 $logger->pushHandler(new StreamHandler('php://stderr', Logger::DEBUG));
 define("MLAB_API_KEY", '6QxfLc4uRn3vWrlgzsWtzTXBW7CYVsQv');
-define("LINE_MESSAGING_API_CHANNEL_SECRET", '222');
-define("LINE_MESSAGING_API_CHANNEL_TOKEN", '14lyWNnWlGRrrXdW5/');
+define("LINE_MESSAGING_API_CHANNEL_SECRET", 'db66a0aa1a057415832cfd97f6963cb3');
+define("LINE_MESSAGING_API_CHANNEL_TOKEN", '22hdP860hpFYokOIcmae6cdlKPpriZO3/XHhRWkLEp8YPkXjS8R36U7reDuvpliAtRKnkbKLNAh2/QByqEocSkrGx3yyz1T6dGdHu9nrSc3t5PejaraL26vuKjCppl3mQ7k/lqhZ4F3XaWH8/4tWiAdB04t89/1O/w1cDnyilFU=');
 $bot = new \LINE\LINEBot(
     new \LINE\LINEBot\HTTPClient\CurlHTTPClient(LINE_MESSAGING_API_CHANNEL_TOKEN),
     ['channelSecret' => LINE_MESSAGING_API_CHANNEL_SECRET]
