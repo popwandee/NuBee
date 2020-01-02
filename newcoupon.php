@@ -53,15 +53,17 @@
 
 if($_POST){
  define("MLAB_API_KEY", '6QxfLc4uRn3vWrlgzsWtzTXBW7CYVsQv');
-    $newCoupon = json_encode(array('name'=> $name,'government_id'=> $government_id,'coupon_id'=> $coupon_id,'log_time'=> $timeNow) );
+    $newCoupon = json_encode(array('name'=> $name,'government_id'=> $government_id,'coupon_id'=> $coupon_id) );
     $opts = array('http' => array( 'method' => "POST",'header' => "Content-type: application/json",'content' => $newCoupon));
     $url = 'https://api.mlab.com/api/1/databases/nubee/collections/coupon?apiKey='.MLAB_API_KEY.'';
     $context = stream_context_create($opts);
     $returnValue = file_get_contents($url,false,$context);
-}
-if($returnValue){   
+    
+    if($returnValue){   
 echo "OK";
 }else{
     echo "No";
 }
+}
+
 ?>
