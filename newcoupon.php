@@ -34,7 +34,6 @@
             <td></td>
             <td>
                 <input type='ยืนยัน' value='Save' class='btn btn-primary' />
-                <a href='index.php' class='btn btn-danger'>Back to read products</a>
             </td>
         </tr>
     </table>
@@ -54,21 +53,15 @@
 
 if($_POST){
  define("MLAB_API_KEY", '6QxfLc4uRn3vWrlgzsWtzTXBW7CYVsQv');
-   try{
     $newCoupon = json_encode(array('name'=> $name,'government_id'=> $government_id,'coupon_id'=> $coupon_id,'log_time'=> $timeNow) );
-                              $opts = array('http' => array( 'method' => "POST",
-                                          'header' => "Content-type: application/json",
-                                          'content' => $newCoupon
-                                           )
-                                        );
-           
-                              $url = 'https://api.mlab.com/api/1/databases/nubee/collections/coupon?apiKey='.MLAB_API_KEY.'';
-                              $context = stream_context_create($opts);
-                              $returnValue = file_get_contents($url,false,$context);
-     }
-    // show error
-    catch(PDOException $exception){
-        die('ERROR: ' . $exception->getMessage());
-    }
+    $opts = array('http' => array( 'method' => "POST",'header' => "Content-type: application/json",'content' => $newCoupon));
+    $url = 'https://api.mlab.com/api/1/databases/nubee/collections/coupon?apiKey='.MLAB_API_KEY.'';
+    $context = stream_context_create($opts);
+    $returnValue = file_get_contents($url,false,$context);
+}
+if($returnValue){   
+echo "OK";
+}else{
+    echo "No";
 }
 ?>
