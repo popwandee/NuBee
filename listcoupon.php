@@ -59,7 +59,12 @@ foreach($data as $rec){
 		$org=$rec->org;
 		$coupon_id=$rec->coupon_id;
 		$dateGetCoupon=$rec->dateGetCoupon;
-				         
+			echo gettype($rec->dateGetCoupon);echo gettype($dateTimeToday);
+	    if ($rec->dateGetCoupon===$dateTimeToday){
+		    echo "Equal";
+	    }else{
+		echo "not Equal";    
+	    }	         
      
     // creating new table row per record
     echo "<tr>";
@@ -82,12 +87,7 @@ echo "</table>";
 else{
     echo "<div align='center' class='alert alert-danger'>ยังไม่มีใครได้รับคูปองในวันนี้.</div>";
 }
-echo gettype($dateGetCoupon);echo gettype($dateTimeToday);
-	    if ($dateGetCoupon===$dateTimeToday){
-		    echo "Equal";
-	    }else{
-		echo "not Equal";    
-	    }
+
          ?>
     </div> <!-- end .container -->
      
