@@ -19,7 +19,6 @@
 define("MLAB_API_KEY", '6QxfLc4uRn3vWrlgzsWtzTXBW7CYVsQv');
 $tz_object = new DateTimeZone('Asia/Bangkok');
 $datetime = new DateTime(); $datetime->setTimezone($tz_object); $dateTimeToday = $datetime->format('Y\-m\-d\');
-$name = "ยศ ชื่อ นามสกุล"; $government_id = "รหัสประจำตัว 10 หลัก" ;
 
 
 ?>
