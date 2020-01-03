@@ -33,7 +33,7 @@ $seedData = array(
  * Standard single-node URI format: 
  * mongodb://[username:password@]host:port/[database]
  */
-$uri = "mongodb://popwandee:os51Servic#@ds259528.mlab.com:59528/nubee";
+$uri = "mongodb://popwandee:os51Servic@ds259528.mlab.com:59528/nubee";
 $client = new MongoDB\Client($uri);
 /*
  * First we'll add a few songs. Nothing is required to create the songs
