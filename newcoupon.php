@@ -24,33 +24,38 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
     $name='name'; $government_id='รหัสประจำตัว 10 หลัก';
     if((!isset($_POST['coupon_id']))&&(isset($_POST['government_id']))){
         $government_id=htmlspecialchars(strip_tags($_POST['government_id']));
-	    echo"\n Government_id from $_POST is ".$government_id;
+	    
         $json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/personel?apiKey='.MLAB_API_KEY.'&q={"government_id":'.$government_id.'}');
                                      $data = json_decode($json);
                                      $isData=sizeof($data);
-	    echo "\n try to get data from mlab";
+	   
                                      if($isData >0){
-					     echo "<br>get Data";
+					    
                                        foreach($data as $rec){
                                          $name=$rec->name;
 					 $government=$rec->government_id;
     					 $org=$rec->org;
-					       echo $name.$government.$org;
+					       
 				       }
 				     }
     }
-	    echo $name;
+	   
 	    ?>
-      
+      <a href='search.php' class='btn btn-primary m-r-1em'>ค้นหา</a><a href='listcoupon.php' class='btn btn-primary m-r-1em'>คูปองที่รับไปแล้ว</a>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
     <table class='table table-hover table-responsive table-bordered'>
+	    
+        <tr>
+            <td>รหัสประจำตัวข้าราชการทหาร</td>
+            <td><input type='text' name='government_id' value="<?php echo $government_id;?>" class='form-control' /></td>
+        </tr>
         <tr>
             <td>ยศ ชื่อ สกุล</td>
             <td><input type='text' name='name' value="<?php echo $name;?>" class='form-control' /></td>
         </tr>
         <tr>
-            <td>รหัสประจำตัวข้าราชการทหาร</td>
-            <td><input type='text' name='government_id' value="<?php echo $government_id;?>" class='form-control' /></td>
+            <td>สังกัด</td>
+            <td><input type='text' name='org' value="<?php echo $org;?>" class='form-control' /></td>
         </tr>
         <tr>
             <td>รหัสคูปอง</td>
@@ -60,6 +65,8 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
             <td></td>
             <td>
                 <input type='submit' value='Save' class='btn btn-primary' />
+                <a href='search.php' class='btn btn-primary m-r-1em'>ค้นหาใหม่</a>
+ 
             </td>
         </tr>
     </table>
@@ -70,11 +77,12 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
 if((isset($_POST['coupon_id']))&&(isset($_POST['government_id']))){    
  $name=htmlspecialchars(strip_tags($_POST['name']));
  $government_id=htmlspecialchars(strip_tags($_POST['government_id']));
+ $org=htmlspecialchars(strip_tags($_POST['org']));
  $coupon_id=htmlspecialchars(strip_tags($_POST['coupon_id']));
 echo "NAME :".$name;
 echo "Government ID :".$government_id;
 echo "COUPON ID :".$coupon_id;
-     $newData = json_encode(array('government_id' => $government_id,'name'=> $name,'coupon_id'=>$coupon_id) );
+     $newData = json_encode(array('government_id' => $government_id,'name'=> $name,'org'=> $org,'coupon_id'=>$coupon_id) );
                                 $opts = array('http' => array( 'method' => "POST",
                                           'header' => "Content-type: application/json",
                                           'content' => $newData
@@ -87,10 +95,10 @@ $url = 'https://api.mlab.com/api/1/databases/nubee/collections/coupon?apiKey='.M
 		    $textReplyMessage= "บันทึกการรับคูปองเรียบร้อย";
 	        }else{ $textReplyMessage= "ไม่สามารถบันทึกได้";
                  }
-echo $textReplyMessage;
+	echo "<div class='alert alert-danger'>".$textReplyMessage."</div>";
         // ยังไม่มีการโพสต์ข้อมูลจากแบบฟอร์ม
     }else{
-        echo $dateTimeNow;
+        echo "<div class='alert alert-danger'>".$dateTimeNow."</div>";
     }
       ?>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
