@@ -27,9 +27,14 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
         $json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/personel?apiKey='.MLAB_API_KEY.'&q={"government_id":'.$government_id.'}');
                                      $data = json_decode($json);
                                      $isData=sizeof($data);
+	    echo "/n try to get data from mlab";
                                      if($isData >0){
+					     echo "<br>get Data";
                                        foreach($data as $rec){
                                          $name=$rec->name;
+					 $government=$rec->government_id;
+    					 $org=$rec->org;
+					       echo $name.$government.$org;
 				       }
 				     }
     }
