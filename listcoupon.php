@@ -21,7 +21,7 @@
     <div class="container">
   
         <div class="page-header">
-            <h1>Read Products</h1>
+            <h1>รายการรับคูปองสำหรับวันนี้</h1>
         </div>
      
         <!-- PHP code to read records will be here -->
@@ -81,7 +81,7 @@ echo "</table>";
 
   }// if no records found
 else{
-    echo "<div class='alert alert-danger'>No records found.</div>";
+    echo "<div class='alert alert-danger'>ยังไม่มีใครได้รับคูปองในวันนี้.</div>";
 }
 
          ?>
