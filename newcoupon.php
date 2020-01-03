@@ -96,7 +96,7 @@ $url = 'https://api.mlab.com/api/1/databases/nubee/collections/coupon?apiKey='.M
 	echo "<div align='center' class='alert alert-success'>".$textReplyMessage."</div>";
         // ยังไม่มีการโพสต์ข้อมูลจากแบบฟอร์ม
     }else{
-        echo "<div align='center' class='alert alert-danger'>".$dateTimeNow."</div>";
+        echo "<div align='center' class='alert alert-danger'>".$dateTimeToday."</div>";
     }
       ?>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
