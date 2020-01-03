@@ -20,7 +20,7 @@
 $tz_object = new DateTimeZone('Asia/Bangkok');
          $datetime = new DateTime();
          $datetime->setTimezone($tz_object);
-         $dateTimeNow = $datetime->format('Y\-m\-d\ H:i:s');
+         $dateTimeToday = $datetime->format('Y\-m\-d\');
     $name='name'; $government_id='รหัสประจำตัว 10 หลัก';
     if((!isset($_POST['coupon_id']))&&(isset($_POST['government_id']))){
         $government_id=htmlspecialchars(strip_tags($_POST['government_id']));
@@ -80,7 +80,7 @@ if((isset($_POST['coupon_id']))&&(isset($_POST['government_id']))){
  $org=htmlspecialchars(strip_tags($_POST['org']));
  $coupon_id=htmlspecialchars(strip_tags($_POST['coupon_id']));
 echo "<div align='çenter' class='alert alert-danger'>".$name." หมายเลขประจำตัว :".$government_id." รับคูปองหมายเลข :".$coupon_id." เรียบร้อย </div>";
-     $newData = json_encode(array('government_id' => $government_id,'name'=> $name,'org'=> $org,'coupon_id'=>$coupon_id) );
+     $newData = json_encode(array('government_id' => $government_id,'name'=> $name,'org'=> $org,'coupon_id'=>$coupon_id,'dateGetCoupon'=>$dateTimeToday) );
                                 $opts = array('http' => array( 'method' => "POST",
                                           'header' => "Content-type: application/json",
                                           'content' => $newData
@@ -93,10 +93,10 @@ $url = 'https://api.mlab.com/api/1/databases/nubee/collections/coupon?apiKey='.M
 		    $textReplyMessage= "บันทึกการรับคูปองเรียบร้อย";
 	        }else{ $textReplyMessage= "ไม่สามารถบันทึกได้";
                  }
-	echo "<div class='alert alert-danger'>".$textReplyMessage."</div>";
+	echo "<div align='center' class='alert alert-success'>".$textReplyMessage."</div>";
         // ยังไม่มีการโพสต์ข้อมูลจากแบบฟอร์ม
     }else{
-        echo "<div class='alert alert-danger'>".$dateTimeNow."</div>";
+        echo "<div align='center' class='alert alert-danger'>".$dateTimeNow."</div>";
     }
       ?>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
