@@ -21,7 +21,11 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
          $datetime = new DateTime();
          $datetime->setTimezone($tz_object);
          $dateTimeToday = $datetime->format('Y-m-d');
-	 if(!isset($dateGetCoupon)){$dateGetCoupon=$dateTimeToday;}
+	 if(!isset($_POST(dateGetCoupon))){
+		 $dateGetCoupon=$dateTimeToday;
+	 }else{
+		$dateGetCoupon=$_POST(dateGetCoupon);	 
+	 }
 	?>
 	
     <!-- container -->
@@ -31,7 +35,17 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
             <h1>รายการรับคูปองสำหรับวันที่ <?php echo $dateGetCoupon;?> </h1>
         </div>
      <a href='search.php' class='btn btn-primary m-r-1em'>ค้นหา</a><a href='newcoupon.php' class='btn btn-primary m-r-1em'>ลงทะเบียนรับคูปอง</a>
-        <!-- PHP code to read records will be here -->
+         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+    <table class='table table-hover table-responsive table-bordered'>
+        <tr>
+            <td>ค้นหาวันที่ (yyyy-mm-dd)</td>
+            <td><input type='text' name='dateGetCoupon' class='form-control' /></td>
+            <td><input type='submit' value='ค้นหา' class='btn btn-primary' /></td>
+        </tr>
+    </table>
+</form>
+	    
+	    <!-- PHP code to read records will be here -->
          <?php
          define("MLAB_API_KEY", '6QxfLc4uRn3vWrlgzsWtzTXBW7CYVsQv');
  $json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/coupon?q={"dateGetCoupon":{"$regex":"'.$dateGetCoupon.'"}}&apiKey='.MLAB_API_KEY);
