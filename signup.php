@@ -11,18 +11,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
  
     // Validate username
     if(empty(trim($_POST["username"]))){
-        $username_err = "Please enter a username.";
+        $username_err = "กรุณากรอก username ด้วยครับ";
     } else{
         // Set parameters
         $param_username = trim($_POST["username"]);
         // Prepare a select statement
-        $json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/manager?apiKey='.MLAB_API_KEY.'&q=q={"username":{"$regex":"'.$param_username.'"}}');
+        $json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/manager?apiKey='.MLAB_API_KEY.'&q={"username":{"$regex":"'.$param_username.'"}}');
         $data = json_decode($json);
         $isData=sizeof($data);
         //ตรวจสอบว่ามีชื่อผู้ใช้นี้อยู่แล้วหรือไม่
         if($isData >0){
             // มีชื่อผู้ใช้นี้อยู่แล้ว - 
-            $username_err = "This username is already taken.";
+            $username_err = "Username นี้มีอยู่แล้ว";
          }else{
             $username = trim($_POST["username"]);
               } 
@@ -32,20 +32,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     
     // Validate password
     if(empty(trim($_POST["password"]))){
-        $password_err = "Please enter a password.";     
+        $password_err = "กรุณากรอก password ด้วยครับ";     
     } elseif(strlen(trim($_POST["password"])) < 6){
-        $password_err = "Password must have atleast 6 characters.";
+        $password_err = "รหัสผ่านจะต้องมีอย่างน้อย 6 ตัวอักษร";
     } else{
         $password = trim($_POST["password"]);
     }
     
     // Validate confirm password
     if(empty(trim($_POST["confirm_password"]))){
-        $confirm_password_err = "Please confirm password.";     
+        $confirm_password_err = "กรุณา confirm password.";     
     } else{
         $confirm_password = trim($_POST["confirm_password"]);
         if(empty($password_err) && ($password != $confirm_password)){
-            $confirm_password_err = "Password did not match.";
+            $confirm_password_err = "Password ไม่ตรงกัน";
         }
     }
     
@@ -119,7 +119,7 @@ $url = 'https://api.mlab.com/api/1/databases/nubee/collections/manager?apiKey='.
                 <input type="submit" class="btn btn-primary" value="Submit">
                 <input type="reset" class="btn btn-default" value="Reset">
             </div>
-            <p>Already have an account? <a href="login.php">Login here</a>.</p>
+            <p>มี account อยู่แล้วใช่ไหม? <a href="login.php">Login ที่นี่</a>.</p>
         </form>
     </div>    
 </body>
