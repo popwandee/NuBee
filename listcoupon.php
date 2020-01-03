@@ -23,7 +23,7 @@
         <div class="page-header">
             <h1>รายการรับคูปองสำหรับวันนี้</h1>
         </div>
-     <a href='search.php' class='btn btn-primary m-r-1em'>ค้นหา</a><a href='listcoupon.php' class='btn btn-primary m-r-1em'>คูปองที่รับไปแล้ว</a>
+     <a href='search.php' class='btn btn-primary m-r-1em'>ค้นหา</a><a href='newcoupon.php' class='btn btn-primary m-r-1em'>ลงทะเบียนรับคูปอง</a>
         <!-- PHP code to read records will be here -->
          <?php
          define("MLAB_API_KEY", '6QxfLc4uRn3vWrlgzsWtzTXBW7CYVsQv');
