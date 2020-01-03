@@ -24,10 +24,11 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
     $name='name'; $government_id='รหัสประจำตัว 10 หลัก';
     if((!isset($_POST['coupon_id']))&&(isset($_POST['government_id']))){
         $government_id=htmlspecialchars(strip_tags($_POST['government_id']));
+	    echo"\n Government_id from $_POST is ".$government_id;
         $json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/personel?apiKey='.MLAB_API_KEY.'&q={"government_id":'.$government_id.'}');
                                      $data = json_decode($json);
                                      $isData=sizeof($data);
-	    echo "/n try to get data from mlab";
+	    echo "\n try to get data from mlab";
                                      if($isData >0){
 					     echo "<br>get Data";
                                        foreach($data as $rec){
