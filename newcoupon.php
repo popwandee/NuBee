@@ -88,13 +88,13 @@ if((isset($_POST['coupon_id']))&&(isset($_POST['government_id']))){
  $government_id=htmlspecialchars(strip_tags($_POST['government_id']));
  $org =		htmlspecialchars(strip_tags($_POST['org']));
  $coupon_id =	htmlspecialchars(strip_tags($_POST['coupon_id']));
-
+ $dateGetCoupon = settype($dateTimeToday, "string");
 // นำข้อมูลเข้าเก็บในฐานข้อมูล
 $newData = json_encode(array('government_id' => $government_id,
 			     'name' => $name,
 			     'org' => $org,
 			     'coupon_id' => $coupon_id,
-			     'dateGetCoupon' => $dateTimeToday) );
+			     'dateGetCoupon' => $dateGetCoupon) );
 $opts = array('http' => array( 'method' => "POST",
                                'header' => "Content-type: application/json",
                                'content' => $newData
