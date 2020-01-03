@@ -16,7 +16,7 @@
             <h1>ลงทะเบียนรับคูปอง</h1>
         </div>
       
-    <form action="/chekperson.php" method="post">
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
     <table class='table table-hover table-responsive table-bordered'>
         <tr>
             <td>ยศ ชื่อ สกุล</td>
@@ -33,13 +33,21 @@
         <tr>
             <td></td>
             <td>
-                <input type='ยืนยัน' value='Save' class='btn btn-primary' />
+                <input type='submit' value='Save' class='btn btn-primary' />
             </td>
         </tr>
     </table>
 </form>
           
     </div> <!-- end .container -->
+    if($_POST){
+        $name=htmlspecialchars(strip_tags($_POST['name']));
+        $government_id=htmlspecialchars(strip_tags($_POST['government_id']));
+        $coupon_id=htmlspecialchars(strip_tags($_POST['coupon_id']));
+        }
+echo "NAME :".$name;
+echo "Government ID :".$government_id;
+echo "COUPON ID :".$coupon_id;
       
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
