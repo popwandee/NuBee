@@ -36,9 +36,12 @@ $isData=sizeof($data);
 if($isData >0){
 // ได้รับข้อมูลมาแล้ว - แยกข้อมูลลงอะเรย์
 foreach($data as $rec){
-        $name=$rec->name;
-$government=$rec->government_id;
-$org=$rec->org;
+
+        $name=$rec->rank." ".$rec->name." ".$rec->lastname;
+	$government=$rec->government_id;
+	$nation_id=$rec->nation_id;
+	$position=$rec->position;
+	$org=$rec->org;
 }
 }else{
 echo "ไม่พบข้อมูลหมายเลชประจำตัวนี้ กรุณาตรวจสอบอีกครั้ง";
@@ -59,10 +62,14 @@ echo "ไม่พบข้อมูลหมายเลชประจำต�
         <tr>
             <td>ยศ ชื่อ สกุล</td>
             <td><input type='text' name='name' value="<?php echo $name;?>" class='form-control' /></td>
+        </tr>        
+	<tr>
+            <td>รหัสประจำตัวประชาชน</td>
+            <td><?php echo $national_id;?></td>
         </tr>
         <tr>
-            <td>สังกัด</td>
-            <td><input type='text' name='org' value="<?php echo $org;?>" class='form-control' /></td>
+            <td>สังกัด-ตำแหน่ง</td>
+            <td><input type='text' name='org' value="<?php echo $org;?>" class='form-control' /><?php echo $position;?></td>
         </tr>
         <tr>
             <td>รหัสคูปอง</td>
