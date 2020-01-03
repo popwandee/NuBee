@@ -15,7 +15,7 @@
         <div class="page-header">
             <h1>ลงทะเบียนรับคูปอง</h1>
         </div>
-      
+      <a href='newcoupon.php' class='btn btn-primary m-r-1em'>ลงทะเบียนรับคูปอง</a><a href='listcoupon.php' class='btn btn-primary m-r-1em'>คูปองที่รับไปแล้ว</a>
     <form action="newcoupon.php" method="post">
     <table class='table table-hover table-responsive table-bordered'>
         
