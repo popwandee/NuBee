@@ -83,6 +83,11 @@ else{
     echo "<div align='center' class='alert alert-danger'>ยังไม่มีใครได้รับคูปองในวันนี้.</div>";
 }
 echo gettype($dateGetCoupon);echo gettype($dateTimeToday);
+	    if ($dateGetCoupon===$dateTimeToday){
+		    echo "Equal";
+	    }else{
+		echo "not Equal";    
+	    }
          ?>
     </div> <!-- end .container -->
      
