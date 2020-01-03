@@ -79,9 +79,7 @@ if((isset($_POST['coupon_id']))&&(isset($_POST['government_id']))){
  $government_id=htmlspecialchars(strip_tags($_POST['government_id']));
  $org=htmlspecialchars(strip_tags($_POST['org']));
  $coupon_id=htmlspecialchars(strip_tags($_POST['coupon_id']));
-echo "NAME :".$name;
-echo "Government ID :".$government_id;
-echo "COUPON ID :".$coupon_id;
+echo "<div align='çenter' class='alert alert-danger'>".$name." หมายเลขประจำตัว :".$government_id." รับคูปองหมายเลข :".$coupon_id." เรียบร้อย </div>";
      $newData = json_encode(array('government_id' => $government_id,'name'=> $name,'org'=> $org,'coupon_id'=>$coupon_id) );
                                 $opts = array('http' => array( 'method' => "POST",
                                           'header' => "Content-type: application/json",
