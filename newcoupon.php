@@ -41,14 +41,38 @@
           
     </div> <!-- end .container -->
     <?php
+    define("MLAB_API_KEY", '6QxfLc4uRn3vWrlgzsWtzTXBW7CYVsQv');
+$tz_object = new DateTimeZone('Asia/Bangkok');
+         $datetime = new DateTime();
+         $datetime->setTimezone($tz_object);
+         $dateTimeNow = $datetime->format('Y\-m\-d\ H:i:s');
+    
     if($_POST){
         $name=htmlspecialchars(strip_tags($_POST['name']));
         $government_id=htmlspecialchars(strip_tags($_POST['government_id']));
         $coupon_id=htmlspecialchars(strip_tags($_POST['coupon_id']));
-        }
+
 echo "NAME :".$name;
 echo "Government ID :".$government_id;
 echo "COUPON ID :".$coupon_id;
+     $newData = json_encode(array('government_id' => $government_id,'name'=> $name,'coupon_id'=>$coupon_id) );
+                                $opts = array('http' => array( 'method' => "POST",
+                                          'header' => "Content-type: application/json",
+                                          'content' => $newData
+                                           )
+                                        );
+$url = 'https://api.mlab.com/api/1/databases/nubee/collections/coupon?apiKey='.MLAB_API_KEY.'';
+        $context = stream_context_create($opts);
+        $returnValue = file_get_contents($url,false,$context);
+        if($returnValue){
+		    $textReplyMessage= "บันทึกการรับคูปองเรียบร้อย";
+	        }else{ $textReplyMessage= "ไม่สามารถบันทึกได้";
+                 }
+echo $textReplyMessage;
+        // ยังไม่มีการโพสต์ข้อมูลจากแบบฟอร์ม
+    }else{
+        echo $dateTimeNow;
+    }
       ?>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
