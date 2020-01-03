@@ -21,10 +21,10 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
          $datetime = new DateTime();
          $datetime->setTimezone($tz_object);
          $dateTimeToday = $datetime->format('Y-m-d');
-	 if(!isset($_POST(dateGetCoupon))){
+	 if(!isset($_POST['dateGetCoupon'])){
 		 $dateGetCoupon=$dateTimeToday;
 	 }else{
-		$dateGetCoupon=$_POST(dateGetCoupon);	 
+		$dateGetCoupon=$_POST['dateGetCoupon'];	 
 	 }
 	?>
 	
