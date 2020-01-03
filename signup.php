@@ -13,34 +13,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty(trim($_POST["username"]))){
         $username_err = "Please enter a username.";
     } else{
+        // Set parameters
+        $param_username = trim($_POST["username"]);
         // Prepare a select statement
-        $sql = "SELECT id FROM users WHERE username = ?";
+        $json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/manager?apiKey='.MLAB_API_KEY.'&q={"username":'.$param_username .'}');
+        $data = json_decode($json);
+        $isData=sizeof($data);
+        //ตรวจสอบว่ามีชื่อผู้ใช้นี้อยู่แล้วหรือไม่
+        if($isData >0){
+            // มีชื่อผู้ใช้นี้อยู่แล้ว - 
+            $username_err = "This username is already taken.";
+         }else{
+            $username = trim($_POST["username"]);
+              } 
+          }
         
-        if($stmt = mysqli_prepare($link, $sql)){
-            // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "s", $param_username);
-            
-            // Set parameters
-            $param_username = trim($_POST["username"]);
-            
-            // Attempt to execute the prepared statement
-            if(mysqli_stmt_execute($stmt)){
-                /* store result */
-                mysqli_stmt_store_result($stmt);
-                
-                if(mysqli_stmt_num_rows($stmt) == 1){
-                    $username_err = "This username is already taken.";
-                } else{
-                    $username = trim($_POST["username"]);
-                }
-            } else{
-                echo "Oops! Something went wrong. Please try again later.";
-            }
-        }
-         
-        // Close statement
-        mysqli_stmt_close($stmt);
-    }
+       
     
     // Validate password
     if(empty(trim($_POST["password"]))){
@@ -64,32 +52,35 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Check input errors before inserting in database
     if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
         
-        // Prepare an insert statement
-        $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
-         
-        if($stmt = mysqli_prepare($link, $sql)){
-            // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
-            
+       
             // Set parameters
             $param_username = $username;
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
             
             // Attempt to execute the prepared statement
-            if(mysqli_stmt_execute($stmt)){
-                // Redirect to login page
+           $newData = json_encode(array('username' => $param_username,
+			        'password' => $param_password
+			        ) );
+           $opts = array('http' => array( 'method' => "POST",
+                               'header' => "Content-type: application/json",
+                               'content' => $newData
+                                           )
+                                        );
+$url = 'https://api.mlab.com/api/1/databases/nubee/collections/manager?apiKey='.MLAB_API_KEY.'';
+        $context = stream_context_create($opts);
+        $returnValue = file_get_contents($url,false,$context);
+        if($returnValue){
+		   echo "<div align='center' class='alert alert-success'>ลงทะเบียนเรียบร้อย</div>";
+	        // Redirect to login page
                 header("location: login.php");
-            } else{
-                echo "Something went wrong. Please try again later.";
-            }
+        }else{
+		           echo "<div align='center' class='alert alert-danger'>ไม่สามารถลงทะเบียนได้</div>";
+                 }
+               
+           
         }
          
-        // Close statement
-        mysqli_stmt_close($stmt);
-    }
-    
-    // Close connection
-    mysqli_close($link);
+      
 }
 ?>
  
