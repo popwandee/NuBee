@@ -16,34 +16,36 @@
  
 </head>
 <body>
- 
+ <?php	
+$tz_object = new DateTimeZone('Asia/Bangkok');
+         $datetime = new DateTime();
+         $datetime->setTimezone($tz_object);
+         $dateTimeToday = $datetime->format('Y\-m\-d\');
+	 if(!isset($dateGetCoupon){	 $dateGetCoupon=$dateTimeToday;	 }
+	?>
+	
     <!-- container -->
     <div class="container">
   
         <div class="page-header">
-            <h1>รายการรับคูปองสำหรับวันนี้</h1>
+            <h1>รายการรับคูปองสำหรับวันที่ <?php echo $dateGetCoupon;?> </h1>
         </div>
      <a href='search.php' class='btn btn-primary m-r-1em'>ค้นหา</a><a href='newcoupon.php' class='btn btn-primary m-r-1em'>ลงทะเบียนรับคูปอง</a>
         <!-- PHP code to read records will be here -->
          <?php
          define("MLAB_API_KEY", '6QxfLc4uRn3vWrlgzsWtzTXBW7CYVsQv');
-$tz_object = new DateTimeZone('Asia/Bangkok');
-         $datetime = new DateTime();
-         $datetime->setTimezone($tz_object);
-         $dateTimeNow = $datetime->format('Y\-m\-d\ H:i:s');
- $json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/coupon?apiKey='.MLAB_API_KEY);
+ $json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/coupon?apiKey='.MLAB_API_KEY.'&q={"dateGetCoupon":'.$dateGetCoupon.'}');
  $data = json_decode($json);
  $isData=sizeof($data);
   if($isData >0){
-      echo"System has data.".$dateTimeNow;
       
       echo "<table class='table table-hover table-responsive table-bordered'>";//start table
- 
     //creating our table heading
     echo "<tr>";
         echo "<th>ID</th>";
         echo "<th>ยศ ชื่อ สกุล</th>";
         echo "<th>หมายเลขประจำตัว</th>";
+        echo "<th>สังกัด</th>";
         echo "<th>คูปอง</th>";
         echo "<th>Action</th>";
     echo "</tr>";
@@ -53,8 +55,8 @@ $id=0;
 foreach($data as $rec){
                  $id++;
                  $name=$rec->name;
-				         $government_id=$rec->government_id;
-				         $coupon_id=$rec->coupon_id;
+		$government_id=$rec->government_id;
+		$coupon_id=$rec->coupon_id;
 				         
      
     // creating new table row per record
@@ -62,14 +64,9 @@ foreach($data as $rec){
         echo "<td>{$id}</td>";
         echo "<td>{$name}</td>";
         echo "<td>{$government_id}</td>";
+        echo "<td>{$org}</td>";
         echo "<td>{$coupon_id}</td>";
         echo "<td>";
-            // read one record 
-            echo "<a href='read_one.php?id={$id}' class='btn btn-info m-r-1em'>Read</a>";
-             
-            // we will use this links on next part of this post
-            echo "<a href='update.php?id={$id}' class='btn btn-primary m-r-1em'>Edit</a>";
- 
             // we will use this links on next part of this post
             echo "<a href='#' onclick='delete_user({$id});'  class='btn btn-danger'>Delete</a>";
         echo "</td>";
@@ -81,7 +78,7 @@ echo "</table>";
 
   }// if no records found
 else{
-    echo "<div class='alert alert-danger'>ยังไม่มีใครได้รับคูปองในวันนี้.</div>";
+    echo "<div align='center' class='alert alert-danger'>ยังไม่มีใครได้รับคูปองในวันนี้.</div>";
 }
 
          ?>
