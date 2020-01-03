@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>List of Coupon for Today</title>
+    <title>ระบบการจ่ายคูปองค่าอาหารกลางวัน พัน.ขกท.</title>
      
     <!-- Latest compiled and minified Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
@@ -23,7 +23,7 @@
         <div class="page-header">
             <h1>รายการรับคูปองสำหรับวันนี้</h1>
         </div>
-     
+     <a href='search.php' class='btn btn-primary m-r-1em'>ค้นหา</a><a href='listcoupon.php' class='btn btn-primary m-r-1em'>คูปองที่รับไปแล้ว</a>
         <!-- PHP code to read records will be here -->
          <?php
          define("MLAB_API_KEY", '6QxfLc4uRn3vWrlgzsWtzTXBW7CYVsQv');
