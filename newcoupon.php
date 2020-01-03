@@ -39,7 +39,7 @@ foreach($data as $rec){
 
         $name=$rec->rank." ".$rec->name." ".$rec->lastname;
 	$government=$rec->government_id;
-	$nation_id=$rec->nation_id;
+	$national_id=$rec->national_id;
 	$position=$rec->position;
 	$org=$rec->org;
 }
@@ -69,7 +69,7 @@ echo "ไม่พบข้อมูลหมายเลชประจำต�
         </tr>     
 	<tr>
             <td>รหัสประจำตัวประชาชน</td>
-            <td><?php echo $nation_id;?></td>
+            <td><?php echo $national_id;?></td>
         </tr>
         <tr>
             <td>สังกัด-ตำแหน่ง</td>
