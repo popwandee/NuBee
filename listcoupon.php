@@ -34,7 +34,7 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
         <!-- PHP code to read records will be here -->
          <?php
          define("MLAB_API_KEY", '6QxfLc4uRn3vWrlgzsWtzTXBW7CYVsQv');
- $json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/coupon?q={"dateGetCoupon":2020-01-04}&apiKey='.MLAB_API_KEY);
+ $json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/coupon?q={"dateGetCoupon":$dateGetCoupon}&apiKey='.MLAB_API_KEY);
  $data = json_decode($json);
  $isData=sizeof($data);
   if($isData >0){
