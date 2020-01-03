@@ -64,12 +64,16 @@ echo "ไม่พบข้อมูลหมายเลชประจำต�
             <td><input type='text' name='name' value="<?php echo $name;?>" class='form-control' /></td>
         </tr>        
 	<tr>
+            <td>ตำแหน่ง</td>
+            <td><?php echo $position;?></td>
+        </tr>     
+	<tr>
             <td>รหัสประจำตัวประชาชน</td>
-            <td><?php echo $national_id;?></td>
+            <td><?php echo $nation_id;?></td>
         </tr>
         <tr>
             <td>สังกัด-ตำแหน่ง</td>
-            <td><input type='text' name='org' value="<?php echo $org;?>" class='form-control' /><?php echo $position;?></td>
+            <td><input type='text' name='org' value="<?php echo $org;?>" class='form-control' /></td>
         </tr>
         <tr>
             <td>รหัสคูปอง</td>
@@ -112,7 +116,7 @@ $url = 'https://api.mlab.com/api/1/databases/nubee/collections/coupon?apiKey='.M
         $returnValue = file_get_contents($url,false,$context);
 
         if($returnValue){
-		   echo "<div align='center' class='alert alert-success'>บันทึกการรับคูปองเรียบร้อย</div>";
+		   echo "<div align='center' class='alert alert-success'>บันทึกการรับคูปองของ ".$name."  ".$position." หมายเลขคูปอง ".$coupon_id." เรียบร้อย</div>";
 	        }else{
 		   echo "<div align='center' class='alert alert-danger'>ไม่สามารถบันทึกได้</div>";
                  }
