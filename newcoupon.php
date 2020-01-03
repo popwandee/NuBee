@@ -40,6 +40,7 @@
 </form>
           
     </div> <!-- end .container -->
+    <?php
     if($_POST){
         $name=htmlspecialchars(strip_tags($_POST['name']));
         $government_id=htmlspecialchars(strip_tags($_POST['government_id']));
@@ -48,7 +49,7 @@
 echo "NAME :".$name;
 echo "Government ID :".$government_id;
 echo "COUPON ID :".$coupon_id;
-      
+      ?>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
    
