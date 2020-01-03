@@ -16,7 +16,7 @@
             <h1>ลงทะเบียนรับคูปอง</h1>
         </div>
       
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+    <form action="/chekperson.php" method="post">
     <table class='table table-hover table-responsive table-bordered'>
         <tr>
             <td>ยศ ชื่อ สกุล</td>
@@ -49,21 +49,3 @@
   
 </body>
 </html>
-<?php
-
-if($_POST){
- define("MLAB_API_KEY", '6QxfLc4uRn3vWrlgzsWtzTXBW7CYVsQv');
-    $newCoupon = json_encode(array('name'=> $name,'government_id'=> $government_id,'coupon_id'=> $coupon_id) );
-    $opts = array('http' => array( 'method' => "POST",'header' => "Content-type: application/json",'content' => $newCoupon));
-    $url = 'https://api.mlab.com/api/1/databases/nubee/collections/coupon?apiKey='.MLAB_API_KEY.'';
-    $context = stream_context_create($opts);
-    $returnValue = file_get_contents($url,false,$context);
-    
-    if($returnValue){   
-echo "OK";
-}else{
-    echo "No";
-}
-}
-
-?>
