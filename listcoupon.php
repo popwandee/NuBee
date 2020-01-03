@@ -58,6 +58,7 @@ foreach($data as $rec){
 		$government_id=$rec->government_id;
 		$org=$rec->org;
 		$coupon_id=$rec->coupon_id;
+		$dateGetCoupon=$rec->dateGetCoupon;
 				         
      
     // creating new table row per record
@@ -81,7 +82,7 @@ echo "</table>";
 else{
     echo "<div align='center' class='alert alert-danger'>ยังไม่มีใครได้รับคูปองในวันนี้.</div>";
 }
-
+echo gettype($dateGetCoupon);
          ?>
     </div> <!-- end .container -->
      
