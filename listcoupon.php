@@ -56,6 +56,7 @@ foreach($data as $rec){
                  $id++;
                  $name=$rec->name;
 		$government_id=$rec->government_id;
+		$org=$rec->org;
 		$coupon_id=$rec->coupon_id;
 				         
      
