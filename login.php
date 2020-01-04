@@ -105,7 +105,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Login">
             </div>
-            <p>ยังไม่มี account ใช่ไหม ? <a href="signup.php">ลงทะเบียน</a>.</p>
+            
         </form>
     </div>    
 </body>
