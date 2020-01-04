@@ -83,8 +83,10 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
 $id=0;
 foreach($data as $rec){
                  $id=$rec->_id;
+	print_r($rec);
 	foreach($id as $rec_id){
-		$id=$rec_id->$oid;
+		print_r($rec_id);
+		//$id=$rec_id->$oid;
 	}
                  $name=$rec->name;
 		$government_id=$rec->government_id;
