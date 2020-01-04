@@ -82,7 +82,7 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
     // retrieve our table contents
 $id=0;
 foreach($data as $rec){
-                 $id++;
+                 $id=$rec->_id;
                  $name=$rec->name;
 		$government_id=$rec->government_id;
 		$org=$rec->org;
@@ -132,7 +132,7 @@ if($action=='deleted'){
 	?>
 	<script type='text/javascript'>
 // confirm record deletion
-function delete_user( id ){
+function delete_coupon( id ){
      
     var answer = confirm('Are you sure?');
     if (answer){
