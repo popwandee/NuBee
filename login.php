@@ -40,7 +40,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
      $param_username = $username;
      
      // Check if username exists, if yes then verify password
-     $json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/personel?apiKey='.MLAB_API_KEY.'&q={"username":{"$regex":"'.$param_username.'"}}');
+     $json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/manager?apiKey='.MLAB_API_KEY.'&q={"username":{"$regex":"'.$param_username.'"}}');
      $data = json_decode($json);
      $isData=sizeof($data);
      if($isData >0){
