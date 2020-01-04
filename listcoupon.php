@@ -82,11 +82,12 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
     // retrieve our table contents
 $id=0;
 foreach($data as $rec){
-                 $id=$rec->_id;
-	print_r($id->$oid);
-	foreach($id as $rec_id){
-		$id=$rec_id;
-		//$id=$rec_id->$oid;
+	$id++;
+                 $_id=$rec->_id;
+	
+	foreach($_id as $rec_id){
+		$_id=$rec_id;
+		
 	}
                  $name=$rec->name;
 		$government_id=$rec->government_id;
@@ -104,7 +105,8 @@ foreach($data as $rec){
         echo "<td>{$coupon_id}</td>";
         echo "<td>";
             // we will use this links on next part of this post
-            echo "<a href='#' onclick='delete_user({$id});'  class='btn btn-danger'>Delete</a>";
+            echo "<a href='#' onclick='delete_user({$_id});'  class='btn btn-danger'>Delete</a>";
+	echo $_id;
         echo "</td>";
     echo "</tr>";
 }
