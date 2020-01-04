@@ -30,7 +30,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $password_err = "กรุณากรอกข้อมูล password.";
     } else{
         $password = trim($_POST["password"]);
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        //$hashed_password = password_hash($password, PASSWORD_DEFAULT);
     }
     
     // Validate credentials
@@ -47,7 +47,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         // มีข้อมูลผู้ใช้อยู่
      foreach($data as $rec){
         $username=$rec->username;
-        $password=$rec->password;
+        $hashed_password=$rec->password;
          }
        if(password_verify($password, $hashed_password)){
                             // Password is correct, so start a new session
@@ -58,7 +58,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["username"] = $username;                            
                             
                             // Redirect user to welcome page
-                            header("location: index.php");
+                            header("location: listcoupon.php");
                         } else{
                             // Display an error message if password is not valid
                             $password_err = "รหัสผ่านไม่ถูกต้อง";
