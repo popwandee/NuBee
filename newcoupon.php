@@ -1,3 +1,16 @@
+<?php
+// Initialize the session
+session_start();
+ 
+// Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: login.php");
+    exit;
+}
+// Include config file
+require_once "config.php";
+
+?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -16,9 +29,8 @@
             <h1>ลงทะเบียนรับคูปอง</h1>
         </div>
 <?php
-define("MLAB_API_KEY", '6QxfLc4uRn3vWrlgzsWtzTXBW7CYVsQv');
-$tz_object = new DateTimeZone('Asia/Bangkok');
-$datetime = new DateTime(); $datetime->setTimezone($tz_object); $dateTimeToday = $datetime->format('Y-m-d');
+
+
 $name = "ยศ ชื่อ นามสกุล"; $government_id = "รหัสประจำตัว 10 หลัก" ; $org = "สังกัด" ;
 
 // กรณียังไม่ได้รับหมายเลขคูปอง แต่ได้หมายเลขประจำตัวจากการค้นหามาแล้ว
@@ -49,6 +61,42 @@ echo "ไม่พบข้อมูลหมายเลชประจำต�
 }else{
 //echo "อาจจะได้คูปองไอดีมาแล้ว หรือยังไม่ได้หมายเลขประจำตัวก็ได้";    
 }
+	    
+
+// กรณีได้รับข้อมูลหมายเลขประจำตัว และหมายเลขคูปองมาแล้ว
+if((isset($_POST['coupon_id']))&&(isset($_POST['government_id']))){
+	// รับค่าข้อมูลจาก POST ให้ตัวแปร
+ $name =	htmlspecialchars(strip_tags($_POST['name']));
+ $government_id=htmlspecialchars(strip_tags($_POST['government_id']));
+ $org =		htmlspecialchars(strip_tags($_POST['org']));
+ $coupon_id =	htmlspecialchars(strip_tags($_POST['coupon_id']));
+ 
+// นำข้อมูลเข้าเก็บในฐานข้อมูล
+$newData = json_encode(array('government_id' => $government_id,
+			     'name' => $name,
+			     'org' => $org,
+			     'coupon_id' => $coupon_id,
+			     'dateGetCoupon' => $dateTimeToday) );
+$opts = array('http' => array( 'method' => "POST",
+                               'header' => "Content-type: application/json",
+                               'content' => $newData
+                                           )
+                                        );
+$url = 'https://api.mlab.com/api/1/databases/nubee/collections/coupon?apiKey='.MLAB_API_KEY.'';
+        $context = stream_context_create($opts);
+        $returnValue = file_get_contents($url,false,$context);
+
+        if($returnValue){
+		   echo "<div align='center' class='alert alert-success'>บันทึกการรับคูปองของ ".$name."  ".$position." หมายเลขคูปอง ".$coupon_id." เรียบร้อย</div>";
+	        }else{
+		   echo "<div align='center' class='alert alert-danger'>ไม่สามารถบันทึกได้</div>";
+                 }
+	
+        // ยังไม่มีการโพสต์ข้อมูลจากแบบฟอร์ม
+    }else{
+        echo "<div align='center' class='alert alert-danger'>".$dateTimeToday."</div>";
+    }
+
 ?>
 
       <a href='search.php' class='btn btn-primary m-r-1em'>ค้นหา</a><a href='listcoupon.php' class='btn btn-primary m-r-1em'>คูปองที่รับไปแล้ว</a>
@@ -91,41 +139,7 @@ echo "ไม่พบข้อมูลหมายเลชประจำต�
 </form>
 
     </div> <!-- end .container -->
-    <?php
-// กรณีได้รับข้อมูลหมายเลขประจำตัว และหมายเลขคูปองมาแล้ว
-if((isset($_POST['coupon_id']))&&(isset($_POST['government_id']))){
-	// รับค่าข้อมูลจาก POST ให้ตัวแปร
- $name =	htmlspecialchars(strip_tags($_POST['name']));
- $government_id=htmlspecialchars(strip_tags($_POST['government_id']));
- $org =		htmlspecialchars(strip_tags($_POST['org']));
- $coupon_id =	htmlspecialchars(strip_tags($_POST['coupon_id']));
- 
-// นำข้อมูลเข้าเก็บในฐานข้อมูล
-$newData = json_encode(array('government_id' => $government_id,
-			     'name' => $name,
-			     'org' => $org,
-			     'coupon_id' => $coupon_id,
-			     'dateGetCoupon' => $dateTimeToday) );
-$opts = array('http' => array( 'method' => "POST",
-                               'header' => "Content-type: application/json",
-                               'content' => $newData
-                                           )
-                                        );
-$url = 'https://api.mlab.com/api/1/databases/nubee/collections/coupon?apiKey='.MLAB_API_KEY.'';
-        $context = stream_context_create($opts);
-        $returnValue = file_get_contents($url,false,$context);
-
-        if($returnValue){
-		   echo "<div align='center' class='alert alert-success'>บันทึกการรับคูปองของ ".$name."  ".$position." หมายเลขคูปอง ".$coupon_id." เรียบร้อย</div>";
-	        }else{
-		   echo "<div align='center' class='alert alert-danger'>ไม่สามารถบันทึกได้</div>";
-                 }
-	
-        // ยังไม่มีการโพสต์ข้อมูลจากแบบฟอร์ม
-    }else{
-        echo "<div align='center' class='alert alert-danger'>".$dateTimeToday."</div>";
-    }
-      ?>
+    
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
