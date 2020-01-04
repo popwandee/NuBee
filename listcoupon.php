@@ -85,7 +85,7 @@ foreach($data as $rec){
                  $id=$rec->_id;
 	print_r($rec);
 	foreach($id as $rec_id){
-		print_r($rec_id);
+		$id=$rec_id;
 		//$id=$rec_id->$oid;
 	}
                  $name=$rec->name;
