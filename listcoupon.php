@@ -45,7 +45,7 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
     <div class="container">
   
         <div class="page-header">
-		<table><tr><td><img src="mibnlogo.png" width="20"></td><td> <h1>รายการรับคูปองสำหรับวันที่ <?php echo $dateGetCoupon;?> </h1></td></tr></table>
+		<table><tr><td><img src="mibnlogo.png" width="50"></td><td> <h1>รายการรับคูปองสำหรับวันที่ <?php echo $dateGetCoupon;?> </h1></td></tr></table>
         </div>
      <a href='search.php' class='btn btn-primary m-r-1em'>ค้นหา</a>
 	    <a href='newcoupon.php' class='btn btn-primary m-r-1em'>ลงทะเบียนรับคูปอง</a>
