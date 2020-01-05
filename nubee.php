@@ -542,17 +542,19 @@ if(!is_null($events)){
 
                                        foreach($data as $rec){
                                          $textReplyMessage= "หมายเลข ".$rec->government_id." คือ ".$rec->rank.$rec->name.' '.$rec->lastname." ค่ะ\n\n";
-				        
+				         $textMessage = new TextMessageBuilder($textReplyMessage);
+		                         $multiMessage->add($textMessage);
                                          }//end for each
 					     
 		                      
 	                              }else{
 
 			               $textReplyMessage=" ไม่พบข้อมูลหมายเลข ".$explodeText[1]." ดังกล่าวค่ะ ";
-	                               }
-			
 				       $textMessage = new TextMessageBuilder($textReplyMessage);
 		                       $multiMessage->add($textMessage);
+	                               }
+			
+				       
 				       $replyData = $multiMessage;
 
                                  break;
