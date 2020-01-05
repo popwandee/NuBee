@@ -585,11 +585,11 @@ if(!is_null($events)){
 
                                  break;		
 		case 'coupon': // find coupon by date default is today yyyy-mm-dd --> 2020-03-01
-				if(!isset($explodeText[1])){
-					$explodeText[1] = $datetime->format('Y-m-d');
+				if(!isset($explodeText[2])){
+					$explodeText[2] = $datetime->format('Y-m-d');
 				}
 				 //$json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/coupon?apiKey='.MLAB_API_KEY.'&q={{"$or": [{"coupon_id":{"$regex":"'.$explodeText[1].'"}}, {"dateGetCoupon":{"$regex":'.$explodeText[2].'}}]}}');
-                                    $json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/coupon?q={"dateGetCoupon":{"$regex":"'.$explodeText[1].'"}}&apiKey='.MLAB_API_KEY);
+                                    $json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/coupon?q={"dateGetCoupon":{"$regex":"'.$explodeText[2].'"}}&apiKey='.MLAB_API_KEY);
 
 				$data = json_decode($json);
                                      $isData=sizeof($data);
