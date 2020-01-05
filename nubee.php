@@ -4,6 +4,9 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require __DIR__."/vendor/autoload.php";
+// Include config file
+require_once "config.php";
+
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\FirePHPHandler;
@@ -66,7 +69,7 @@ use LINE\LINEBot\QuickReplyBuilder\ButtonBuilder\QuickReplyButtonBuilder;
 use LINE\LINEBot\QuickReplyBuilder\QuickReplyMessageBuilder;
 $logger = new Logger('LineBot');
 $logger->pushHandler(new StreamHandler('php://stderr', Logger::DEBUG));
-define("MLAB_API_KEY", '6QxfLc4uRn3vWrlgzsWtzTXBW7CYVsQv');
+
 define("LINE_MESSAGING_API_CHANNEL_SECRET", 'db66a0aa1a057415832cfd97f6963cb3');
 define("LINE_MESSAGING_API_CHANNEL_TOKEN", '22hdP860hpFYokOIcmae6cdlKPpriZO3/XHhRWkLEp8YPkXjS8R36U7reDuvpliAtRKnkbKLNAh2/QByqEocSkrGx3yyz1T6dGdHu9nrSc3t5PejaraL26vuKjCppl3mQ7k/lqhZ4F3XaWH8/4tWiAdB04t89/1O/w1cDnyilFU=');
 $bot = new \LINE\LINEBot(
@@ -472,7 +475,7 @@ if(!is_null($events)){
 			$multiMessage->add($textMessage);
 			$replyData =$multiMessage;
                         break;                                          
-                    case "p":
+                    case "me":
                         // ถ้าขณะนั้นเป็นการสนทนาใน ROOM หรือ GROUP
                         if(!is_null($groupId) || !is_null($roomId)){
                             if($eventObj->isGroupEvent()){// ถ้าอยู่ใน GROUP
@@ -530,74 +533,30 @@ if(!is_null($events)){
                         break;  
 			*/
 		case '#':
-				
-				 $json = file_get_contents('https://api.mlab.com/api/1/databases/crma51/collections/phonebook?apiKey='.MLAB_API_KEY.'&q={"$or":[{"name":{"$regex":"'.$explodeText[1].'"}},{"lastname":{"$regex":"'.$explodeText[1].'"}},{"nickname":{"$regex":"'.$explodeText[1].'"}},{"nickname2":{"$regex":"'.$explodeText[1].'"}},{"position":{"$regex":"'.$explodeText[1].'"}}]}');
+				if(!isset($explodeText[2])){
+					$explodeText[2] = $datetime->format('Y-m-d');
+				}
+				 $json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/coupon?apiKey='.MLAB_API_KEY.'&q={"$or":[{"coupon":{"$regex":"'.$explodeText[1].'"}},{"dateGetCoupon":{"$regex":"'.$explodeText[2].'"}}]}');
                                      $data = json_decode($json);
                                      $isData=sizeof($data);
-			             $count = 1;
+
                                      if($isData >0){
-		                       $founduser= 1;
+
                                        foreach($data as $rec){
-                                         $textReplyMessage= $textReplyMessage.$count.' '.$rec->rank.$rec->name.' '.$rec->lastname.' ('.$rec->position.' '.$rec->deploy_position.') '.$rec->Email.' โทร '.$rec->Tel1." ค่ะ\n\n";
-				         if(isset($rec->Image) and (!$hasImageUrlStatus) and ($count<5)){
-		 	                  $imageUrl="https://thaitimes.online/wp-content/uploads/".$rec->Image;
-	                                  $imageMessage = new ImageMessageBuilder($imageUrl,$imageUrl);
-	                                  $multiMessage->add($imageMessage);
-		                            }
-			                  $count++;
+                                         $textReplyMessage= $rec->name.' ('.$rec->position.') รับคูปองหมายเลข '.$rec->coupon_id." ค่ะ\n\n";
+				        
                                          }//end for each
-		                       $textMessage = new TextMessageBuilder($textReplyMessage);
-		                       $multiMessage->add($textMessage);
+					     
+		                      
 	                              }else{
-		                       $founduser= NULL;
-			               $textReplyMessage=".... ";
+
+			               $textReplyMessage=" ไม่พบข้อมูลคูปองค่ะ ";
 	                               }
 			
-				$json = file_get_contents('https://api.mlab.com/api/1/databases/crma51/collections/km?apiKey='.MLAB_API_KEY.'&q={"question":{"$regex":"^'.$explodeText[1].'"}}');
-                                $data = json_decode($json);
-                                $isData=sizeof($data);
-                                if($isData >0){
-                                   foreach($data as $rec){
-                                           $textReplyMessage=$rec->question.".......\n".$rec->answer."\n";
-                                           }//end for each
-					if(isset($rec->Image)){
-		 	                  $picFullSize="https://thaitimes.online/wp-content/uploads/".$rec->Image;
-	                                  $imageMessage = new ImageMessageBuilder($picFullSize,$picFullSize);
-	                                  $multiMessage->add($imageMessage);
-		                            }
-			            $foundkm=1;
-				    $textMessage = new TextMessageBuilder($textReplyMessage);
-		                    $multiMessage->add($textMessage);
-                                   }else{//don't found data
-					$foundkm=NULL;
-					 $textReplyMessage=".... ";
-				         }
-				
-				if(!isset($picFullSize)){	// กรณียังไม่มีรูป จะ Random รูปภาพจากฐานข้อมูลมาแสดง
-				$numImg=rand(1,37);
-				$json = file_get_contents('https://api.mlab.com/api/1/databases/crma51/collections/img?apiKey='.MLAB_API_KEY.'&q={"no":'.$numImg.'}&max=1');
-                                $data = json_decode($json);
-                                $isData=sizeof($data);
-                                if($isData >0){
-                                   foreach($data as $rec){
-                                          $picFullSize= "https://thaitimes.online/wp-content/uploads/".$rec->img;
-                                           }//end for each
-				       $imageMessage = new ImageMessageBuilder($picFullSize,$picFullSize);
-	                               $multiMessage->add($imageMessage);
-				 }else{//don't found data
-					$foundimg=NULL;
-					 $textReplyMessage=".... ";
-				         }
-				}// end isset $picFullSize // มีรูปภาพจาก KM แล้ว
-				 
-				if($founduser1 or $founduser2 or $foundkm){
-					
-				       $replyData = $multiMessage;
-		                 }else{
 				       $textMessage = new TextMessageBuilder($textReplyMessage);
 		                       $multiMessage->add($textMessage);
 					$replyData = $multiMessage;
-				}
+
                                  break;
 				
 			   case '#lisa':
