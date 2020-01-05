@@ -585,28 +585,31 @@ if(!is_null($events)){
 
                                  break;		
 		case 'coupon': // find coupon by date default is today yyyy-mm-dd --> 2020-03-01
-				if(!isset($explodeText[2])){
-					$explodeText[2] = $datetime->format('Y-m-d');
+				if(!isset($explodeText[1])){
+					$explodeText[1] = $datetime->format('Y-m-d');
 				}
-				 $json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/coupon?apiKey='.MLAB_API_KEY.'&q={{"$or": [{"coupon_id":{"$regex":"'.$explodeText[1].'"}}, {"dateGetCoupon":{"$regex":"'.$explodeText[2].'"}}]}}');
-                                     $data = json_decode($json);
+				 //$json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/coupon?apiKey='.MLAB_API_KEY.'&q={{"$or": [{"coupon_id":{"$regex":"'.$explodeText[1].'"}}, {"dateGetCoupon":{"$regex":'.$explodeText[2].'}}]}}');
+                                    $json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/coupon?q={"dateGetCoupon":{"$regex":"'.$explodeText[1].'"}}&apiKey='.MLAB_API_KEY);
+
+				$data = json_decode($json);
                                      $isData=sizeof($data);
 
                                      if($isData >0){
 
                                        foreach($data as $rec){
                                          $textReplyMessage= $rec->name.' รับคูปองหมายเลข '.$rec->coupon_id.' เมื่อวันที่ '.$rec->dateGetCoupon." ค่ะ\n\n";
-				        
+				         $textMessage = new TextMessageBuilder($textReplyMessage);
+		                       $multiMessage->add($textMessage);
                                          }//end for each
 					     
 		                      
 	                              }else{
 
 			               $textReplyMessage=" ไม่พบข้อมูลคูปองค่ะ ";
+					$textMessage = new TextMessageBuilder($textReplyMessage);
+		                       $multiMessage->add($textMessage);
 	                               }
 			
-				       $textMessage = new TextMessageBuilder($textReplyMessage);
-		                       $multiMessage->add($textMessage);
 				       $textReplyMessage=$explodeText[1].$explodeText[2];
 				       $textMessage = new TextMessageBuilder($textReplyMessage);
 		                       $multiMessage->add($textMessage);
