@@ -23,7 +23,7 @@ require_once "config.php";
 </head>
 <body>
     <div class="page-header">
-        <h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. ยินดีต้อนรับครับ</h1>
+        <table><tr><td><img src="mibnlogo.png" width="50"></td><td><h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. ยินดีต้อนรับครับ</h1></td></tr></table>
     </div>
     <p>
         <a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>
