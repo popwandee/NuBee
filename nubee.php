@@ -589,7 +589,7 @@ if(!is_null($events)){
 					$explodeText[2] = $datetime->format('Y-m-d');
 				}
 				 $json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/coupon?apiKey='.MLAB_API_KEY.'
-				 &q={"coupon":"'.$explodeText[1].'","dateGetCoupon":{"$regex":"'.$explodeText[2].'"}}');
+				 &q={{"$and": [{"coupon_id": "'.$explodeText[1].'"}, {"dateGetCoupon":{"$regex":"'.$explodeText[2].'"}}]}}');
                                      $data = json_decode($json);
                                      $isData=sizeof($data);
 
