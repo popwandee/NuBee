@@ -543,7 +543,7 @@ if(!is_null($events)){
                                      if($isData >0){
 
                                        foreach($data as $rec){
-                                         $textReplyMessage= $rec->name.' ('.$rec->position.') รับคูปองหมายเลข '.$rec->coupon_id." ค่ะ\n\n";
+                                         $textReplyMessage= $rec->name.' รับคูปองหมายเลข '.$rec->coupon_id.' เมื่อวันที่ '.$rec->dateGetCoupon." ค่ะ\n\n";
 				        
                                          }//end for each
 					     
