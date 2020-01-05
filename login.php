@@ -88,8 +88,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     </style>
 </head>
 <body>
+ <div class="container">
+ <div class="page-header">
+            <table><tr><td><img src="mibnlogo.png" width="50"></td><td><h2>Login</h2></td></tr></table>
+        </div>
     <div class="wrapper">
-        <h2>Login</h2>
+
         <p>กรุณากรอกข้อมูลเพื่อ login.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
@@ -107,6 +111,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>
             
         </form>
-    </div>    
+    </div>  
+ </div>
 </body>
 </html>
