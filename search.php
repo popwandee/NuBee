@@ -26,7 +26,7 @@ require_once "config.php";
     <div class="container">
    
         <div class="page-header">
-            <h1>ลงทะเบียนรับคูปอง</h1>
+            <table><tr><td><img src="mibnlogo.png" width="50"></td><td><h1>ลงทะเบียนรับคูปอง</h1></td></tr></table>
         </div>
       <a href='newcoupon.php' class='btn btn-primary m-r-1em'>ลงทะเบียนรับคูปอง</a>
      <a href='listcoupon.php' class='btn btn-primary m-r-1em'>คูปองที่รับไปแล้ว</a>
