@@ -534,7 +534,7 @@ if(!is_null($events)){
 			*/
 		case 'id':
 				
-				 $json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/personel?apiKey='.MLAB_API_KEY.'&q={"name":{"$regex":'.$explodeText[1].'}}');
+				 $json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/personel?apiKey='.MLAB_API_KEY.'&q={"government_id":'.$explodeText[1].'}');
                                      $data = json_decode($json);
                                      $isData=sizeof($data);
 
@@ -560,7 +560,7 @@ if(!is_null($events)){
                                  break;
 		case 'name': // find people by name
 				
-				 $json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/personel?apiKey='.MLAB_API_KEY.'&q={"name":{"$regex":'.$explodeText[1].'}}');
+				 $json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/personel?apiKey='.MLAB_API_KEY.'&q={"name":'.$explodeText[1].'}');
                                      $data = json_decode($json);
                                      $isData=sizeof($data);
 
@@ -588,7 +588,8 @@ if(!is_null($events)){
 				if(!isset($explodeText[2])){
 					$explodeText[2] = $datetime->format('Y-m-d');
 				}
-				 $json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/coupon?apiKey='.MLAB_API_KEY.'&q={"coupon":"'.$explodeText[1].'","dateGetCoupon":{"$regex":"'.$explodeText[2].'"}}');
+				 $json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/coupon?apiKey='.MLAB_API_KEY.'
+				 &q={"coupon":"'.$explodeText[1].'","dateGetCoupon":{"$regex":"'.$explodeText[2].'"}}');
                                      $data = json_decode($json);
                                      $isData=sizeof($data);
 
