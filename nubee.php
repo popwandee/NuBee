@@ -532,7 +532,59 @@ if(!is_null($events)){
                         );       
                         break;  
 			*/
-		case '#':
+		case 'id':
+				
+				 $json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/personel?apiKey='.MLAB_API_KEY.'&q={"$or":[{"government_id":{"$regex":"'.$explodeText[1].'"}}]}');
+                                     $data = json_decode($json);
+                                     $isData=sizeof($data);
+
+                                     if($isData >0){
+
+                                       foreach($data as $rec){
+                                         $textReplyMessage= "หมายเลข ".$rec->government_id." คือ ".$rec->rank.$rec->name.' '.$rec->lastname." ค่ะ\n\n";
+				        
+                                         }//end for each
+					     
+		                      
+	                              }else{
+
+			               $textReplyMessage=" ไม่พบข้อมูลหมายเลข ".$explodeText[1]." ดังกล่าวค่ะ ";
+	                               }
+			
+				       $textMessage = new TextMessageBuilder($textReplyMessage);
+		                       $multiMessage->add($textMessage);
+				       $replyData = $multiMessage;
+
+                                 break;
+		case 'name': // find people by name
+				
+				 $json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/personel?apiKey='.MLAB_API_KEY.'&q={"$or":[{"name":{"$regex":"'.$explodeText[1].'"}}]}');
+                                     $data = json_decode($json);
+                                     $isData=sizeof($data);
+
+                                     if($isData >0){
+					$count=0;
+                                       foreach($data as $rec){
+					 $count++;
+                                         $textReplyMessage= $count." ".$rec->rank.$rec->name.' '.$rec->lastname." หมายเลข ".$rec->government_id."\n";
+				         $textMessage = new TextMessageBuilder($textReplyMessage);
+		                         $multiMessage->add($textMessage);
+                                         }//end for each
+					     
+		                      
+	                              }else{
+
+			               $textReplyMessage=" ไม่พบข้อมูลกำลังพลชื่อ ".$explodeText[1]." ดังกล่าวค่ะ ";
+				       $textMessage = new TextMessageBuilder($textReplyMessage);
+		                       $multiMessage->add($textMessage);
+	                               }
+			
+				       $textMessage = new TextMessageBuilder($textReplyMessage);
+		                       $multiMessage->add($textMessage);
+				       $replyData = $multiMessage;
+
+                                 break;		
+		case 'coupon': // find coupon by date default is today yyyy-mm-dd --> 2020-03-01
 				if(!isset($explodeText[2])){
 					$explodeText[2] = $datetime->format('Y-m-d');
 				}
