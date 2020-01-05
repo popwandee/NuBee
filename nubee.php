@@ -534,7 +534,7 @@ if(!is_null($events)){
 			*/
 		case 'id':
 				
-				 $json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/personel?apiKey='.MLAB_API_KEY.'&q={"government_id":{"$regex":"'.$explodeText[1].'"}}');
+				 $json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/personel?apiKey='.MLAB_API_KEY.'&q={"government_id":{"$regex":'.$explodeText[1].'}}');
                                      $data = json_decode($json);
                                      $isData=sizeof($data);
 
