@@ -33,8 +33,31 @@ require_once "config.php";
 
 $name = "ยศ ชื่อ นามสกุล"; $government_id = "รหัสประจำตัว 10 หลัก" ; $org = "สังกัด" ; $personel_id = '';
 	    
-if((!isset($_POST['coupon_id']))&&(isset($_POST['personel_id']))){
-// รับตัวแปรหมายเลขประจำตัว
+if(!isset($_POST['coupon_id'])){
+	if(isset($_POST['government_id'])){
+		// รับตัวแปรหมายเลขประจำตัว
+$government_id=htmlspecialchars(strip_tags($_POST['government_id']));
+
+// ดึงข้อมูลจากฐานข้อมูล
+$json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/personel?apiKey='.MLAB_API_KEY.'&q={"government_id":'.$government_id.'}');
+$data = json_decode($json);
+$isData=sizeof($data);
+		//ตรวจสอบว่าได้รับข้อมูลมาหรือไม่
+if($isData >0){
+// ได้รับข้อมูลมาแล้ว - แยกข้อมูลลงอะเรย์
+foreach($data as $rec){
+
+        $name=$rec->rank." ".$rec->name." ".$rec->lastname;
+	$government_id=$rec->government_id;
+	$national_id=$rec->national_id;
+	$position=$rec->position;
+	$org=$rec->org;
+}
+}else{
+echo "ไม่พบข้อมูลหมายเลชประจำตัวนี้ กรุณาตรวจสอบอีกครั้ง";
+}
+	}elseif(isset($_POST['personel_id'])){
+	// รับตัวแปรหมายเลขประจำตัว
 $personel_id=htmlspecialchars(strip_tags($_POST['personel_id']));
 
 // ดึงข้อมูลจากฐานข้อมูล
@@ -55,39 +78,15 @@ foreach($data as $rec){
 }
 }else{
 echo "ไม่พบข้อมูลหมายเลชประจำตัวนี้ กรุณาตรวจสอบอีกครั้ง";
-}
+}	
+		
+	}
+
 }else{
 //echo "อาจจะได้คูปองไอดีมาแล้ว หรือยังไม่ได้หมายเลขประจำตัวก็ได้";    
 }
 
-// กรณียังไม่ได้รับหมายเลขคูปอง แต่ได้หมายเลขประจำตัวจากการค้นหามาแล้ว
 
-if((!isset($_POST['coupon_id']))&&(isset($_POST['government_id']))){
-// รับตัวแปรหมายเลขประจำตัว
-$government_id=htmlspecialchars(strip_tags($_POST['government_id']));
-
-// ดึงข้อมูลจากฐานข้อมูล
-$json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/personel?apiKey='.MLAB_API_KEY.'&q={"government_id":'.$government_id.'}');
-$data = json_decode($json);
-$isData=sizeof($data);
-
-//ตรวจสอบว่าได้รับข้อมูลมาหรือไม่
-if($isData >0){
-// ได้รับข้อมูลมาแล้ว - แยกข้อมูลลงอะเรย์
-foreach($data as $rec){
-
-        $name=$rec->rank." ".$rec->name." ".$rec->lastname;
-	$government_id=$rec->government_id;
-	$national_id=$rec->national_id;
-	$position=$rec->position;
-	$org=$rec->org;
-}
-}else{
-echo "ไม่พบข้อมูลหมายเลชประจำตัวนี้ กรุณาตรวจสอบอีกครั้ง";
-}
-}else{
-//echo "อาจจะได้คูปองไอดีมาแล้ว หรือยังไม่ได้หมายเลขประจำตัวก็ได้";    
-}
 	    
 
 // กรณีได้รับข้อมูลหมายเลขประจำตัว และหมายเลขคูปองมาแล้ว
