@@ -51,7 +51,7 @@ require_once "config.php";
         
         <tr>
             <td>ลำดับที่ - รหัสประจำตัวข้าราชการทหาร</td>
-            <td><input type='text' name='personel_id' class='form-control' />--</td>
+            <td><input type='text' name='personel_id' class='form-control' /></td>
             <td><input type='text' name='government_id' class='form-control' /></td>
         </tr>
         <tr>
