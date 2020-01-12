@@ -61,7 +61,7 @@ echo "ไม่พบข้อมูลหมายเลชประจำต�
 $personel_id=htmlspecialchars(strip_tags($_POST['personel_id']));
 
 echo " ดึงข้อมูลจากฐานข้อมูล by personel_id";
-$json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/personel?apiKey='.MLAB_API_KEY.'&q={"personel_id":'.$personel_id.'}');
+$json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/personel?apiKey='.MLAB_API_KEY.'&q={"id":'.$personel_id.'}');
 $data = json_decode($json);
 $isData=sizeof($data);
 
