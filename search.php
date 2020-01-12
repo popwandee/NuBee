@@ -50,7 +50,8 @@ require_once "config.php";
     <table class='table table-hover table-responsive table-bordered'>
         
         <tr>
-            <td>รหัสประจำตัวข้าราชการทหาร</td>
+            <td>ลำดับที่ - รหัสประจำตัวข้าราชการทหาร</td>
+            <td><input type='text' name='personel_id' class='form-control' />--</td>
             <td><input type='text' name='government_id' class='form-control' /></td>
         </tr>
         <tr>
