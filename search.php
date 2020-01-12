@@ -31,21 +31,7 @@ require_once "config.php";
       <a href='newcoupon.php' class='btn btn-primary m-r-1em'>ลงทะเบียนรับคูปอง</a>
      <a href='listcoupon.php' class='btn btn-primary m-r-1em'>คูปองที่รับไปแล้ว</a>
      <a href='logout.php' class='btn btn-danger'>Logout</a>
-      <form action="newcoupon.php" method="post">
-    <table class='table table-hover table-responsive table-bordered'>
-        
-        <tr>
-            <td>ลำดับที่</td>
-            <td><input type='text' name='personel_id' class='form-control' /></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <input type='submit' value='Search' class='btn btn-primary' />
-            </td>
-        </tr>
-    </table>
-</form>
+      
     <form action="newcoupon.php" method="post">
     <table class='table table-hover table-responsive table-bordered'>
         
@@ -55,8 +41,8 @@ require_once "config.php";
             <td><input type='text' name='government_id' class='form-control' /></td>
         </tr>
         <tr>
-            <td></td>
-            <td>
+            
+            <td colspan="3">
                 <input type='submit' value='Search' class='btn btn-primary' />
             </td>
         </tr>
