@@ -34,7 +34,7 @@ require_once "config.php";
 $name = "ยศ ชื่อ นามสกุล"; $government_id = "รหัสประจำตัว 10 หลัก" ; $org = "สังกัด" ; $personel_id = '';
 	    
 if(!isset($_POST['coupon_id'])){
-	if(isset($_POST['government_id'])){
+	if((isset($_POST['government_id']))&&(!empty($_POST['government_id']))){
 		//echo " รับตัวแปรหมายเลขประจำตัว";
 $government_id=htmlspecialchars(strip_tags($_POST['government_id']));
 
@@ -56,7 +56,7 @@ foreach($data as $rec){
 }else{
 echo "ไม่พบข้อมูลหมายเลชประจำตัวนี้ กรุณาตรวจสอบอีกครั้ง";
 }
-	}elseif(isset($_POST['personel_id'])){
+	}elseif((isset($_POST['personel_id']))&&(!empty($_POST['personel_id']))){
 	//echo " รับตัวแปรหมายเลข personel_id";
 $personel_id=htmlspecialchars(strip_tags($_POST['personel_id']));
 
