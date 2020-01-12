@@ -35,10 +35,10 @@ $name = "ยศ ชื่อ นามสกุล"; $government_id = "รหั
 	    
 if(!isset($_POST['coupon_id'])){
 	if(isset($_POST['government_id'])){
-		echo " รับตัวแปรหมายเลขประจำตัว";
+		//echo " รับตัวแปรหมายเลขประจำตัว";
 $government_id=htmlspecialchars(strip_tags($_POST['government_id']));
 
-echo " ดึงข้อมูลจากฐานข้อมูล by government_id";
+//echo " ดึงข้อมูลจากฐานข้อมูล by government_id";
 $json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/personel?apiKey='.MLAB_API_KEY.'&q={"government_id":'.$government_id.'}');
 $data = json_decode($json);
 $isData=sizeof($data);
@@ -57,10 +57,10 @@ foreach($data as $rec){
 echo "ไม่พบข้อมูลหมายเลชประจำตัวนี้ กรุณาตรวจสอบอีกครั้ง";
 }
 	}elseif(isset($_POST['personel_id'])){
-	echo " รับตัวแปรหมายเลข personel_id";
+	//echo " รับตัวแปรหมายเลข personel_id";
 $personel_id=htmlspecialchars(strip_tags($_POST['personel_id']));
 
-echo " ดึงข้อมูลจากฐานข้อมูล by personel_id";
+//echo " ดึงข้อมูลจากฐานข้อมูล by personel_id";
 $json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/personel?apiKey='.MLAB_API_KEY.'&q={"id":'.$personel_id.'}');
 $data = json_decode($json);
 $isData=sizeof($data);
