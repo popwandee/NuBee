@@ -66,7 +66,7 @@ $url = 'https://api.mlab.com/api/1/databases/nubee/collections/coupon?apiKey='.M
     			exit;
         // ยังไม่มีการโพสต์ข้อมูลจากแบบฟอร์ม
     }else{
-        echo "<div align='center' class='alert alert-danger'>".$dateTimeToday."</div>";
+        echo "<div align='center' class='alert alert-success'>".$dateTimeToday."</div>";
 
 	// กรณีค้นหาจากหมายเลข 10 หลัก
 	if((isset($_POST['government_id']))&&(!empty($_POST['government_id']))){
