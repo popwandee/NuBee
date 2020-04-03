@@ -8,11 +8,6 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 }
 
-      if(isset($_SESSION["message"])){ 
-       $message = $_SESSION["message"]; 
-      }else{
-       $message = '';
-      } 
 // Include config file
 require_once "config.php";
 
@@ -53,7 +48,7 @@ require_once "config.php";
             </td>
         </tr>
      <tr><td colspan="3">
-    <?php echo $message; ?>
+  
       </td></tr>
     </table>
 </form>
