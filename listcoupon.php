@@ -105,7 +105,8 @@ foreach($data as $rec){
         echo "<td>{$coupon_id}</td>";
         echo "<td>";
             // we will use this links on next part of this post
-            echo "<a href='delete.php?id='.$_id'.'>Delete</a>";
+	$del_url="delete.php?id=".$_id;
+            echo "<a href='.$del_url.'>Delete</a>";
 	echo $_id;
         echo "</td>";
     echo "</tr>";
