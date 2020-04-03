@@ -103,7 +103,11 @@ $url = 'https://api.mlab.com/api/1/databases/nubee/collections/coupon?apiKey='.M
 			$national_id=$rec->national_id;
 
 			}
-		} // if($isData >0)
+		}else{
+			$_SESSION["message"] = "ไม่พบคนที่คุณค้นหา";
+   			 header("location: search.php");
+    			exit;
+		}// if($isData >0)
 		
 	}// end of if((isset($_POST['government_id']))&&(!empty($_POST['government_id']))){
 
