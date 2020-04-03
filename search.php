@@ -48,7 +48,9 @@ require_once "config.php";
             </td>
         </tr>
      <tr><td colspan="3">
-  
+  <?php  
+     if(isset($_SESSION["message"])){ echo $_SESSION["message"];}
+      ?>
       </td></tr>
     </table>
 </form>
