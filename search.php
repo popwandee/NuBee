@@ -8,7 +8,11 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 }
 
-      if(isset($_SESSION["message"])){ $message=$_SESSION["message"]; }else{$message='';} 
+      if(isset($_SESSION["message"])){ 
+       $message=$_SESSION["message"]; 
+      }else{
+       $message='';
+      } 
 // Include config file
 require_once "config.php";
 
