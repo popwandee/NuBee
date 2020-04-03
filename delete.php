@@ -14,7 +14,7 @@ $opts = array('http' => array( 'method' => "DELETE",
                                'header' => "Content-type: application/json",
                                            )
                                         );
-$url = 'https://api.mlab.com/api/1/databases/nubee/collections/coupon/'.$_id.'?apiKey='.MLAB_API_KEY.',type: “DELETE”,
+$url = 'https://api.mlab.com/api/1/databases/nubee/collections/coupon/$_id'?apiKey='.MLAB_API_KEY.',type: “DELETE”,
    timeout: 300000';
         $context = stream_context_create($opts);
         $returnValue = file_get_contents($url,false,$context);
@@ -23,7 +23,7 @@ $url = 'https://api.mlab.com/api/1/databases/nubee/collections/coupon/'.$_id.'?a
         // tell the user record was deleted
         header('Location: listcoupon.php?action=deleted');
 	        }else{
-		    die('Unable to delete record.');
+		    header('Location: listcoupon.php?message=Unable to delete record');
                  }
 	
      
