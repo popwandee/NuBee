@@ -32,7 +32,7 @@ require_once "config.php";
 <?php
 	    
 // กรณีได้รับข้อมูลหมายเลขประจำตัว และหมายเลขคูปองมาแล้ว
-if(isset($_POST['coupon_id'])&&isset($_POST['government_id'])&&isset($_POST['name'])){
+if(isset($_POST['coupon_id'])&&(isset($_POST['government_id']))&&(isset($_POST['name']))){
 	// รับค่าข้อมูลจาก POST ให้ตัวแปร
  $name =	htmlspecialchars(strip_tags($_POST['name']));
  $government_id=htmlspecialchars(strip_tags($_POST['government_id']));
