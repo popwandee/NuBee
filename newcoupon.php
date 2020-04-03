@@ -31,7 +31,7 @@ require_once "config.php";
 <?php
 
 
-$name = Null ; $government_id = Null ; $org = Null ; $personel_id = Null;
+$name = "" ; $government_id = "" ; $org = "" ; $personel_id = "";
 	    
 if(!isset($_POST['coupon_id'])){
 	if((isset($_POST['government_id']))&&(!empty($_POST['government_id']))){
@@ -54,7 +54,7 @@ foreach($data as $rec){
 	$org=$rec->org;
 }
 }else{
-$_SESSION["message"]= "ไม่พบข้อมูลหมายเลขประจำตัวนี้ กรุณาตรวจสอบอีกครั้ง";
+$_SESSION["message"] = "ไม่พบข้อมูลหมายเลขประจำตัวนี้ กรุณาตรวจสอบอีกครั้ง";
 	 header("location: search.php");
     exit;
 }
