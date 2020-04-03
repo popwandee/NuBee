@@ -28,10 +28,85 @@ require_once "config.php";
         <div class="page-header">
             <table><tr><td><img src="mibnlogo.png" width="50"></td><td> <h1>ลงทะเบียนรับคูปอง</h1></td></tr></table>
         </div>
-	    
+	    <?php
 	    $government_id='';
 	    $name='';
 	    $national_id='';
+// กรณีได้รับข้อมูลหมายเลขประจำตัว และหมายเลขคูปองมาแล้ว
+if(isset($_POST['coupon_id'])&&(isset($_POST['government_id']))&&(isset($_POST['name']))){
+	// รับค่าข้อมูลจาก POST ให้ตัวแปร
+ $name =	htmlspecialchars(strip_tags($_POST['name']));
+ $government_id=htmlspecialchars(strip_tags($_POST['government_id']));
+ $coupon_id =	htmlspecialchars(strip_tags($_POST['coupon_id']));
+ 
+// นำข้อมูลเข้าเก็บในฐานข้อมูล
+$newData = json_encode(array('government_id' => $government_id,
+			     'name' => $name,
+			     'coupon_id' => $coupon_id,
+			     'dateGetCoupon' => $dateTimeToday) );
+$opts = array('http' => array( 'method' => "POST",
+                               'header' => "Content-type: application/json",
+                               'content' => $newData
+                                           )
+                                        );
+$url = 'https://api.mlab.com/api/1/databases/nubee/collections/coupon?apiKey='.MLAB_API_KEY.'';
+        $context = stream_context_create($opts);
+        $returnValue = file_get_contents($url,false,$context);
+
+        if($returnValue){
+		   echo "<div align='center' class='alert alert-success'>บันทึกการรับคูปองของ ".$name." หมายเลขคูปอง ".$coupon_id." เรียบร้อย</div>";
+	        }else{
+		   echo "<div align='center' class='alert alert-danger'>ไม่สามารถบันทึกได้</div>";
+                 }
+	
+        // ยังไม่มีการโพสต์ข้อมูลจากแบบฟอร์ม
+    }else{
+        echo "<div align='center' class='alert alert-danger'>".$dateTimeToday."</div>";
+
+	// กรณีค้นหาจากหมายเลข 10 หลัก
+	if((isset($_POST['government_id']))&&(!empty($_POST['government_id']))){
+		//echo " รับตัวแปรหมายเลขประจำตัว";
+		$government_id=htmlspecialchars(strip_tags($_POST['government_id']));
+
+		//echo " ดึงข้อมูลจากฐานข้อมูล by government_id";
+		$json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/personel?apiKey='.MLAB_API_KEY.'&q={"government_id":'.$government_id.'}');
+		$data = json_decode($json);
+		$isData=sizeof($data);
+		//ตรวจสอบว่าได้รับข้อมูลมาหรือไม่
+		if($isData > 0){
+			// ได้รับข้อมูลมาแล้ว - แยกข้อมูลลงอะเรย์
+			foreach($data as $rec){
+        			$name=$rec->rank." ".$rec->name." ".$rec->lastname;
+				$government_id=$rec->government_id;
+				$national_id=$rec->national_id;
+
+				}
+			}// จบกรณีif($isData > 0)
+	}elseif((isset($_POST['personel_id']))&&(!empty($_POST['personel_id']))){
+		//echo " รับตัวแปรหมายเลข personel_id";
+		$personel_id=htmlspecialchars(strip_tags($_POST['personel_id']));
+
+		//echo " ดึงข้อมูลจากฐานข้อมูล by personel_id";
+		$json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/personel?apiKey='.MLAB_API_KEY.'&q={"id":'.$personel_id.'}');
+		$data = json_decode($json);
+		$isData=sizeof($data);
+		//ตรวจสอบว่าได้รับข้อมูลมาหรือไม่
+		if($isData >0){
+			// ได้รับข้อมูลมาแล้ว - แยกข้อมูลลงอะเรย์
+			foreach($data as $rec){
+        		$name=$rec->rank." ".$rec->name." ".$rec->lastname;
+			$government_id=$rec->government_id;
+			$national_id=$rec->national_id;
+
+			}
+		} // if($isData >0)
+		
+	}// end of if((isset($_POST['government_id']))&&(!empty($_POST['government_id']))){
+
+}  // end of if(isset($_POST['coupon_id'])&&isset($_POST['government_id'])&&isset($_POST['name']))
+
+?>
+
 
       <a href='search.php' class='btn btn-primary m-r-1em'>ค้นหา</a>
 	    <a href='listcoupon.php' class='btn btn-primary m-r-1em'>คูปองที่รับไปแล้ว</a>
