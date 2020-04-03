@@ -7,6 +7,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: login.php");
     exit;
 }
+
+      if(isset($_SESSION["message"])){ $message=$_SESSION["message"]; }else{$message='';} ?>
 // Include config file
 require_once "config.php";
 
@@ -47,8 +49,7 @@ require_once "config.php";
             </td>
         </tr>
      <tr><td colspan="3">
-     <?php 
-      if(isset($_SESSION["message"])){ $message=$_SESSION["message"]; echo $message; ?>
+    <?php echo $message;?>
       </td></tr>
     </table>
 </form>
