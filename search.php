@@ -46,6 +46,10 @@ require_once "config.php";
                 <input type='submit' value='Search' class='btn btn-primary' />
             </td>
         </tr>
+     <tr><td colspan="3">
+     <?php 
+      if(isset($_SESSION["message"])){ $message=$_SESSION["message"]; echo $message; ?>
+      </td></tr>
     </table>
 </form>
           
