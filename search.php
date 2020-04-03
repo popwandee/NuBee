@@ -48,8 +48,7 @@ require_once "config.php";
             </td>
         </tr>
      <tr><td colspan="3">
-      <div align='center' class='alert alert-danger'>
-  <?php  if(isset($_SESSION["message"])){ echo $_SESSION["message"];} ?> </div>
+  <?php  if(isset($_SESSION["message"])){ echo $_SESSION["message"];} ?> 
       </td></tr>
     </table>
 </form>
