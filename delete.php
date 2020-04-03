@@ -23,7 +23,7 @@ $url = 'https://api.mlab.com/api/1/databases/nubee/collections/coupon/$_id'?apiK
         // tell the user record was deleted
         header('Location: listcoupon.php?action=deleted');
 	        }else{
-		    header('Location: listcoupon.php?message=Unable to delete record');
+		    header('Location: listcoupon.php?message=CannotDeleteRecord');
                  }
 	
      
