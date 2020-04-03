@@ -54,11 +54,16 @@ $url = 'https://api.mlab.com/api/1/databases/nubee/collections/coupon?apiKey='.M
         $returnValue = file_get_contents($url,false,$context);
 
         if($returnValue){
-		   echo "<div align='center' class='alert alert-success'>บันทึกการรับคูปองของ ".$name." หมายเลขคูปอง ".$coupon_id." เรียบร้อย</div>";
+		   $message= "<div align='center' class='alert alert-success'>บันทึกการรับคูปองของ ".$name." หมายเลขคูปอง ".$coupon_id." เรียบร้อย</div>";
+		   echo $message;
+		   
 	        }else{
-		   echo "<div align='center' class='alert alert-danger'>ไม่สามารถบันทึกได้</div>";
+		   $message= "<div align='center' class='alert alert-danger'>ไม่สามารถบันทึกได้</div>";
+		echo $message;
                  }
-	
+			$_SESSION["message"]=$message;
+		   	header("location: search.php");
+    			exit;
         // ยังไม่มีการโพสต์ข้อมูลจากแบบฟอร์ม
     }else{
         echo "<div align='center' class='alert alert-danger'>".$dateTimeToday."</div>";
@@ -82,7 +87,7 @@ $url = 'https://api.mlab.com/api/1/databases/nubee/collections/coupon?apiKey='.M
 
 				}
 			}else{
-			$_SESSION["message"] = "ไม่พบคนที่คุณค้นหา";
+			$_SESSION["message"] = "<div align='center' class='alert alert-danger'>ไม่พบคนที่คุณค้นหา</div>";
    			 header("location: search.php");
     			exit;
 		}// จบกรณีif($isData > 0)
@@ -104,7 +109,7 @@ $url = 'https://api.mlab.com/api/1/databases/nubee/collections/coupon?apiKey='.M
 
 			}
 		}else{
-			$_SESSION["message"] = "ไม่พบคนที่คุณค้นหา";
+			$_SESSION["message"] = "<div align='center' class='alert alert-danger'>ไม่พบคนที่คุณค้นหา</div>";
    			 header("location: search.php");
     			exit;
 		}// if($isData >0)
