@@ -81,7 +81,11 @@ $url = 'https://api.mlab.com/api/1/databases/nubee/collections/coupon?apiKey='.M
 				$national_id=$rec->national_id;
 
 				}
-			}// จบกรณีif($isData > 0)
+			}else{
+			$_SESSION["message"] == "ไม่พบคนที่คุณค้นหา"){
+   			 header("location: search.php");
+    			exit;
+		}// จบกรณีif($isData > 0)
 	}elseif((isset($_POST['personel_id']))&&(!empty($_POST['personel_id']))){
 		//echo " รับตัวแปรหมายเลข personel_id";
 		$personel_id=htmlspecialchars(strip_tags($_POST['personel_id']));
