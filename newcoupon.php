@@ -54,9 +54,8 @@ foreach($data as $rec){
 	$org=$rec->org;
 }
 }else{
-$_SESSION["message"] = "ไม่พบข้อมูลหมายเลขประจำตัวนี้ กรุณาตรวจสอบอีกครั้ง";
-	 header("location: search.php");
-
+echo "ไม่พบข้อมูลหมายเลขประจำตัวนี้ กรุณาตรวจสอบอีกครั้ง";
+	
 }
 	}elseif((isset($_POST['personel_id']))&&(!empty($_POST['personel_id']))){
 	//echo " รับตัวแปรหมายเลข personel_id";
@@ -79,9 +78,8 @@ foreach($data as $rec){
 	$org=$rec->org;
 }
 }else{
-$_SESSION["message"] = "ไม่พบข้อมูลหมายเลขประจำตัวนี้ กรุณาตรวจสอบอีกครั้ง";
-	 header("location: search.php");
-    exit;
+echo "ไม่พบข้อมูลหมายเลขประจำตัวนี้ กรุณาตรวจสอบอีกครั้ง";
+	
 }	
 		
 	}
