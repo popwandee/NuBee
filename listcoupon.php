@@ -62,7 +62,7 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
 	    
 	    <!-- PHP code to read records will be here -->
          <?php
-         define("MLAB_API_KEY", '6QxfLc4uRn3vWrlgzsWtzTXBW7CYVsQv');
+
  $json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/coupon?q={"dateGetCoupon":{"$regex":"'.$dateGetCoupon.'"}}&apiKey='.MLAB_API_KEY);
  $data = json_decode($json);
  $isData=sizeof($data);
@@ -105,7 +105,7 @@ foreach($data as $rec){
         echo "<td>{$coupon_id}</td>";
         echo "<td>";
             // we will use this links on next part of this post
-            echo "<a href='#' onclick='delete_coupon({$_id});'  class='btn btn-danger'>Delete</a>";
+            echo "<a href='delete.php?id='.$_id'.'>Delete</a>";
 	echo $_id;
         echo "</td>";
     echo "</tr>";
