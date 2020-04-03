@@ -31,7 +31,7 @@ require_once "config.php";
 <?php
 
 
-$name = "ยศ ชื่อ นามสกุล"; $government_id = "" ; $org = "สังกัด" ; $personel_id = '';
+$name = Null ; $government_id = Null ; $org = Null ; $personel_id = Null;
 	    
 if(!isset($_POST['coupon_id'])){
 	if((isset($_POST['government_id']))&&(!empty($_POST['government_id']))){
@@ -55,6 +55,8 @@ foreach($data as $rec){
 }
 }else{
 echo "ไม่พบข้อมูลหมายเลขประจำตัวนี้ กรุณาตรวจสอบอีกครั้ง";
+	 header("location: search.php");
+    exit;
 }
 	}elseif((isset($_POST['personel_id']))&&(!empty($_POST['personel_id']))){
 	//echo " รับตัวแปรหมายเลข personel_id";
@@ -78,6 +80,8 @@ foreach($data as $rec){
 }
 }else{
 echo "ไม่พบข้อมูลหมายเลขประจำตัวนี้ กรุณาตรวจสอบอีกครั้ง";
+	 header("location: search.php");
+    exit;
 }	
 		
 	}
@@ -121,9 +125,7 @@ $url = 'https://api.mlab.com/api/1/databases/nubee/collections/coupon?apiKey='.M
         // ยังไม่มีการโพสต์ข้อมูลจากแบบฟอร์ม
     }else{
         echo "<div align='center' class='alert alert-danger'>".$dateTimeToday."</div>";
-    }
-
-?>
+  ?>
 
       <a href='search.php' class='btn btn-primary m-r-1em'>ค้นหา</a>
 	    <a href='listcoupon.php' class='btn btn-primary m-r-1em'>คูปองที่รับไปแล้ว</a>
@@ -166,6 +168,7 @@ $url = 'https://api.mlab.com/api/1/databases/nubee/collections/coupon?apiKey='.M
     </table>
 </form>
 
+	    <?php } ?>
     </div> <!-- end .container -->
     
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
