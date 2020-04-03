@@ -62,7 +62,7 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
 	    
 	    <!-- PHP code to read records will be here -->
          <?php
-
+$message=isset($_GET['message']) ? $_GET['message'] : '');
  $json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/coupon?q={"dateGetCoupon":{"$regex":"'.$dateGetCoupon.'"}}&apiKey='.MLAB_API_KEY);
  $data = json_decode($json);
  $isData=sizeof($data);
