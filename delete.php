@@ -9,7 +9,7 @@ try {
     $id=isset($_GET['id']) ? $_GET['id'] : die('ERROR: Record ID not found.');
  
     // delete query
-    
+    echo "$id is ".$id;
 $opts = array('http' => array( 'method' => "DELETE",
                                'header' => "Content-type: application/json",
                                            )
@@ -23,7 +23,7 @@ $url = 'https://api.mlab.com/api/1/databases/nubee/collections/coupon/$id'?apiKe
         // tell the user record was deleted
         header('Location: listcoupon.php?message=deleted');
 	        }else{
-		    header('Location: listcoupon.php?message=CannotDeleted');
+		    die('CannotDeleted');
                  }
 	
      
