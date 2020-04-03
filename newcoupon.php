@@ -82,7 +82,7 @@ $url = 'https://api.mlab.com/api/1/databases/nubee/collections/coupon?apiKey='.M
 
 				}
 			}else{
-			$_SESSION["message"] == "ไม่พบคนที่คุณค้นหา";
+			$_SESSION["message"] = "ไม่พบคนที่คุณค้นหา";
    			 header("location: search.php");
     			exit;
 		}// จบกรณีif($isData > 0)
