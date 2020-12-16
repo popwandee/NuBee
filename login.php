@@ -60,7 +60,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
      if($isData >0){
         echo "<br>มีข้อมูลผู้ใช้อยู่";
       
-           foreach($data as $rec){
+           foreach($retVal as $rec){ print_r($rec);
              $username=$rec->username;
              $hashed_password=$rec->password;
            }
