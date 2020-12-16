@@ -4,7 +4,8 @@ session_start();
  
 // Check if the user is already logged in, if yes then redirect him to welcome page
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location: index.php");
+    //header("location: index.php");
+ echo "go to index.php";
     exit;
 }
  
@@ -12,21 +13,21 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 require_once "config.php";
 include "vender/restdbclass.php";
  
-// Define variables and initialize with empty values
+echo "Define variables and initialize with empty values";
 $username = $password = "";
 $username_err = $password_err = "";
  
-// Processing form data when form is submitted
+echo "Processing form data when form is submitted";
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
-    // Check if username is empty
+    echo " Check if username is empty";
     if(empty(trim($_POST["username"]))){
         $username_err = "กรุณากรอกข้อมูล username.";
     } else{
         $username = trim($_POST["username"]);
     }
     
-    // Check if password is empty
+    echo "Check if password is empty"; 
     if(empty(trim($_POST["password"]))){
         $password_err = "กรุณากรอกข้อมูล password.";
     } else{
@@ -34,13 +35,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         //$hashed_password = password_hash($password, PASSWORD_DEFAULT);
     }
     
-    // Validate credentials
+    echo " Validate credentials";
     if(empty($username_err) && empty($password_err)){
      
-     // Set parameters
+     echo " Set parameters";
      $param_username = $username;
      
-     // Check if username exists, if yes then verify password    
+     echo" Check if username exists, if yes then verify password  ";  
      $data = new RestDB();
 $collectionName = "mibnmanager";
 $obj =  array("username" => $param_username);
@@ -49,7 +50,7 @@ print_r($return);
      exit;
      $isData=sizeof($return);
      if($isData >0){
-        // มีข้อมูลผู้ใช้อยู่
+        echo " มีข้อมูลผู้ใช้อยู่";
      foreach($data as $rec){
         $username=$rec->username;
         $hashed_password=$rec->password;
