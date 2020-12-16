@@ -43,6 +43,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
      
      echo" Check if username exists, if yes then verify password  ";  
      $data = new RestDB();
+     $collectionName = "mibnmanager";
+     $obj =  array("username" => $param_username);
+     $return = $data->selectDocument($collectionName, $obj);
+
 
     }else{
      echo "<br> กรุณากรอกข้อมูล Username และ Password";
