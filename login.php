@@ -5,7 +5,7 @@ session_start();
 // Check if the user is already logged in, if yes then redirect him to welcome page
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     //header("location: index.php");
- echo "go to index.php";
+ echo "<br>go to index.php";
     exit;
 }
  
@@ -13,11 +13,21 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 require_once "config.php";
 include "vender/restdbclass.php";
  
-echo "Define variables and initialize with empty values";
+echo "<br>Define variables and initialize with empty values";
 $username = $password = "";
 $username_err = $password_err = "";
  
-echo "Processing form data when form is submitted";
+echo "<br>Processing form data when form is submitted";
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+ 
+    echo " <br> Check if username is empty";
+     if(empty(trim($_POST["username"]))){
+        $username_err = "กรุณากรอกข้อมูล username."; echo "<br>empty username, username_err is ".$username_err;
+    } else{
+        $username = trim($_POST["username"]);echo "<br>username is ".$username_err;
+    }
+
+}
 
 ?>
  
