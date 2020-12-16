@@ -58,7 +58,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
      
      $isData=sizeof($retVal);
     // if($isData >0){
-      if(!$retVal){
+      if($retVal){
         echo "<br>มีข้อมูลผู้ใช้อยู่";
       
            foreach($retVal as $rec){ 
