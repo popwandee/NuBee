@@ -47,10 +47,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
      $obj =  array("username" => $param_username);
      $return = $data->selectDocument($collectionName, $obj);
      print_r($return);
+     $isData=sizeof($return);
+     if($isData >0){
+        echo "<br>มีข้อมูลผู้ใช้อยู่";
+      }else{ 
+        $username_err = "ไม่มีข้อมูล Username นี้ในฐานข้อมูลครับ"; 
+        echo $username_err;
+     }
 
-    }else{
-     echo "<br> กรุณากรอกข้อมูล Username และ Password";
-    }
+    }else{ echo "<br> กรุณากรอกข้อมูล Username และ Password"; }
 
 
 } // end if server request method
