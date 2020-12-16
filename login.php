@@ -61,8 +61,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         echo "<br>มีข้อมูลผู้ใช้อยู่";
       
            foreach($retVal as $rec){ print_r($rec);
-             $username=$rec->username;
-             $hashed_password=$rec->password;
+             $username=$rec['username'];
+             $hashed_password=$rec['password'];
            }
       echo "<br>password is ".$password;
       echo "<br>password form db is ".$hashed_password;
