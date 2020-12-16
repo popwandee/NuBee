@@ -47,6 +47,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
      $obj ="";//  array("username" => "admin");
      $db = new RestDB();
      $res = $db->selectDocument($collectionName, $obj);
+     print_r($res);
      $isData=sizeof($res);
      if($isData >0){
         echo "<br>มีข้อมูลผู้ใช้อยู่";
