@@ -45,7 +45,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
      
 
     $apiurl = 'https://area51-dfba.restdb.io/rest/mibnmanager';
-     $obj =  array("username" => "admin");
+     $obj =  array("username" => $username);
     $post_vars = json_encode($obj);
         $queryString = http_build_query( ['q'=>$post_vars] );
    $url = $apiurl.'?'.$queryString;
@@ -64,6 +64,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
              $username=$rec->username;
              $hashed_password=$rec->password;
            }
+      echo "<br>password is ".$password;
+      echo "<br>password form db is ".$hashed_password;
 
              if(password_verify($password, $hashed_password)){
                             // Password is correct, so start a new session
