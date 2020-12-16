@@ -46,7 +46,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
      $collectionName = "mibnmanager";
      $obj =  array("username" => $param_username);
      $return = $data->selectDocument($collectionName, $obj);
-
+     print_r($return);
 
     }else{
      echo "<br> กรุณากรอกข้อมูล Username และ Password";
