@@ -11,7 +11,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
  
 // Include config file
 require_once "config.php";
-include "vendor/restdbclass.php";
+require __DIR__."vendor/restdbclass.php";
  
 echo "<br>Define variables and initialize with empty values";
 $username = $password = "";
