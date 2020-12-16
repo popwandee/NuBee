@@ -42,14 +42,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
      $param_username = $username;
      
      echo" Check if username exists, if yes then verify password  ";  
-     $data = new RestDB();
+     $db = new RestDB();
      $collectionName = "mibnmanager";
      $obj =  array("username" => "admin");
-     $return = $data->selectDocument($collectionName, $obj);
-     print_r($return);
+     $return = $db->selectDocument($collectionName, $obj);
      $isData=sizeof($return);
      if($isData >0){
         echo "<br>มีข้อมูลผู้ใช้อยู่";
+      
+           foreach($data as $rec){
+             $username=$rec->username;
+             $hashed_password=$rec->password;
+         }
+
       }else{ 
         $username_err = "ไม่มีข้อมูล Username นี้ในฐานข้อมูลครับ"; 
         echo $username_err;
