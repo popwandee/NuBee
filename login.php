@@ -35,6 +35,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         //$hashed_password = password_hash($password, PASSWORD_DEFAULT);
     }
 
+ echo " Validate credentials";
+    if(empty($username_err) && empty($password_err)){
+     
+     echo "<br>nothing error, Set parameters";
+     $param_username = $username;
+     
+     echo" Check if username exists, if yes then verify password  ";  
+     $data = new RestDB();
+
+    }else{
+     echo "<br> กรุณากรอกข้อมูล Username และ Password";
+    }
+
 
 } // end if server request method
 
