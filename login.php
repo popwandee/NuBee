@@ -24,10 +24,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
      if(empty(trim($_POST["username"]))){
         $username_err = "กรุณากรอกข้อมูล username."; echo "<br>empty username, username_err is ".$username_err;
     } else{
-        $username = trim($_POST["username"]);echo "<br>username is ".$username_err;
+        $username = trim($_POST["username"]);echo "<br>username is ".$username;
+    }
+ 
+ echo "<br>Check if password is empty"; 
+    if(empty(trim($_POST["password"]))){
+        $password_err = "กรุณากรอกข้อมูล password."; echo "<br>empty password, password_err is ".$password_err;
+    } else{
+        $password = trim($_POST["password"]);echo "<br>password is ".$password;
+        //$hashed_password = password_hash($password, PASSWORD_DEFAULT);
     }
 
-}
+
+} // end if server request method
 
 ?>
  
