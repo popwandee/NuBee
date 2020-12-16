@@ -11,7 +11,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
  
 // Include config file
 require_once "config.php";
-require "vendor/restdbclass.php";
+
  
 echo "<br>Define variables and initialize with empty values";
 $username = $password = "";
@@ -43,12 +43,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
      
      echo"<br>Check if username exists, if yes then verify password.";  
      
-     $collectionName = "mibnmanager"; echo "<br>collection mibnmanager.";
-     $obj ="";//  array("username" => "admin");
-     $db = new RestDB();
-     $res = $db->selectDocument($collectionName, $obj);
-     print_r($res);
-     $isData=sizeof($res);
+    
+    CONST APIKEY = '5fd9fb83ff9d670638140649';
+
+    private $apiurl = 'https://area51-dfba.restdb.io/rest/mibnmanager';
+     $obj =  array("username" => "admin");
+    $post_vars = json_encode($obj);
+        $queryString = http_build_query( ['q'=>$post_vars] );
+   $url = $apiurl.'?'.$queryString;
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json','x-apikey:'.APIKEY) );
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        $return_data = curl_exec($ch);
+        curl_close($ch);
+        $retVal = json_decode($return_data, TRUE);
+     print_r($retVal);
+     $isData=sizeof($retVal);
      if($isData >0){
         echo "<br>มีข้อมูลผู้ใช้อยู่";
       
