@@ -43,16 +43,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
      
      echo"<br>Check if username exists, if yes then verify password.";  
      
-    
-    CONST APIKEY = '5fd9fb83ff9d670638140649';
 
-    private $apiurl = 'https://area51-dfba.restdb.io/rest/mibnmanager';
+    $apiurl = 'https://area51-dfba.restdb.io/rest/mibnmanager';
      $obj =  array("username" => "admin");
     $post_vars = json_encode($obj);
         $queryString = http_build_query( ['q'=>$post_vars] );
    $url = $apiurl.'?'.$queryString;
         $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json','x-apikey:'.APIKEY) );
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json','x-apikey:5fd9fb83ff9d670638140649') );
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         $return_data = curl_exec($ch);
         curl_close($ch);
