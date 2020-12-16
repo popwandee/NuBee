@@ -18,68 +18,7 @@ $username = $password = "";
 $username_err = $password_err = "";
  
 echo "Processing form data when form is submitted";
-if($_SERVER["REQUEST_METHOD"] == "POST"){
- 
-    echo " Check if username is empty";
-    if(empty(trim($_POST["username"]))){
-        $username_err = "กรุณากรอกข้อมูล username.";
-    } else{
-        $username = trim($_POST["username"]);
-    }
-    
-    echo "Check if password is empty"; 
-    if(empty(trim($_POST["password"]))){
-        $password_err = "กรุณากรอกข้อมูล password.";
-    } else{
-        $password = trim($_POST["password"]);
-        //$hashed_password = password_hash($password, PASSWORD_DEFAULT);
-    }
-    
-    echo " Validate credentials";
-    if(empty($username_err) && empty($password_err)){
-     
-     echo " Set parameters";
-     $param_username = $username;
-     
-     echo" Check if username exists, if yes then verify password  ";  
-     $data = new RestDB();
-$collectionName = "mibnmanager";
-$obj =  array("username" => $param_username);
-$return = $data->selectDocument($collectionName, $obj);
-print_r($return);
-     exit;
-     $isData=sizeof($return);
-     if($isData >0){
-        echo " มีข้อมูลผู้ใช้อยู่";
-     foreach($data as $rec){
-        $username=$rec->username;
-        $hashed_password=$rec->password;
-         }
-       if(password_verify($password, $hashed_password)){
-                            // Password is correct, so start a new session
-                            session_start();
-                            
-                            // Store data in session variables
-                            $_SESSION["loggedin"] = true;
-                            $_SESSION["username"] = $username;                            
-                            
-                            // Redirect user to welcome page
-                            header("location: listcoupon.php");
-                        } else{
-                            // Display an error message if password is not valid
-                            $password_err = "รหัสผ่านไม่ถูกต้อง";
-                        }
-      }else{
-      $username_err = "ไม่มีข้อมูล Username นี้ครับ";
-}
-     
-       
-    }else{
-     echo "กรุณากรอกข้อมูล Username และ Password";
-    }
-    
-   
-}
+
 ?>
  
 <!DOCTYPE html>
