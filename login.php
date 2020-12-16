@@ -11,7 +11,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
  
 // Include config file
 require_once "config.php";
-include "vender/restdbclass.php";
+include "vendor/restdbclass.php";
  
 echo "<br>Define variables and initialize with empty values";
 $username = $password = "";
@@ -41,10 +41,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
      echo "<br>nothing error, Set parameters";
      $param_username = $username;
      
-     echo" Check if username exists, if yes then verify password  ";  
+     echo"<br>Check if username exists, if yes then verify password.";  
      
-     $collectionName = "mibnmanager";
-     $obj =  array("username" => "admin");
+     $collectionName = "mibnmanager"; echo "<br>collection mibnmanager.";
+     $obj ="";//  array("username" => "admin");
      $db = new RestDB();
      $res = $db->selectDocument($collectionName, $obj);
      $isData=sizeof($res);
