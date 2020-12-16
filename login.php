@@ -10,6 +10,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
  
 // Include config file
 require_once "config.php";
+include("vender/restdbclass.php");
  
 // Define variables and initialize with empty values
 $username = $password = "";
@@ -39,10 +40,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
      // Set parameters
      $param_username = $username;
      
-     // Check if username exists, if yes then verify password
-     $json = file_get_contents('https://api.mlab.com/api/1/databases/nubee/collections/manager?apiKey='.MLAB_API_KEY.'&q={"username":{"$regex":"'.$param_username.'"}}');
-     $data = json_decode($json);
-     $isData=sizeof($data);
+     // Check if username exists, if yes then verify password    
+     $data = new RestDB();
+$collectionName = "mibnmanager";
+$obj =  array("username" => $param_username);
+$return = $data->selectDocument($collectionName, $obj);
+print_r($return);
+     
+     $isData=sizeof($return);
      if($isData >0){
         // มีข้อมูลผู้ใช้อยู่
      foreach($data as $rec){
