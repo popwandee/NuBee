@@ -44,7 +44,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
      echo" Check if username exists, if yes then verify password  ";  
      $data = new RestDB();
      $collectionName = "mibnmanager";
-     $obj =  array("username" => $param_username);
+     $obj =  array("username" => "admin");
      $return = $data->selectDocument($collectionName, $obj);
      print_r($return);
      $isData=sizeof($return);
