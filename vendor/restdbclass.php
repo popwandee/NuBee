@@ -11,11 +11,11 @@ $obj =  array("name" => "ไพศาล");
 $return = $test->selectDocument($collectionName, $obj);
 print_r($return);
 */
- echo "from RestDB";
+
 class RestDB {
 
-    CONST APIDB = 'apidb';
-    CONST APIKEY = 'api-key';
+    CONST APIDB = 'area51-dfba';
+    CONST APIKEY = '5fd9fb83ff9d670638140649';
 
     private $apiurl = '';
     
