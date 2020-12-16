@@ -55,17 +55,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $return_data = curl_exec($ch);
         curl_close($ch);
         $retVal = json_decode($return_data, TRUE);
-     print_r($retVal);
+     
      $isData=sizeof($retVal);
-     if($isData >0){
+    // if($isData >0){
+      if(!$retVal){
         echo "<br>มีข้อมูลผู้ใช้อยู่";
       
-           foreach($retVal as $rec){ print_r($rec);
+           foreach($retVal as $rec){ 
              $username=$rec['username'];
              $hashed_password=$rec['password'];
            }
-      echo "<br>password is ".$password;
-      echo "<br>password form db is ".$hashed_password;
 
              if(password_verify($password, $hashed_password)){
                             // Password is correct, so start a new session
