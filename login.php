@@ -53,7 +53,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
            foreach($data as $rec){
              $username=$rec->username;
              $hashed_password=$rec->password;
-         }
+           }
+
+             if(password_verify($password, $hashed_password)){
+                            // Password is correct, so start a new session
+                            session_start();
+                            
+                            // Store data in session variables
+                            $_SESSION["loggedin"] = true;
+                            $_SESSION["username"] = $username;                            
+                            
+                            // Redirect user to welcome page
+                            header("location: listcoupon.php");
+                        } else{
+                            // Display an error message if password is not valid
+                            $password_err = "รหัสผ่านไม่ถูกต้อง";
+                        }
 
       }else{ 
         $username_err = "ไม่มีข้อมูล Username นี้ในฐานข้อมูลครับ"; 
