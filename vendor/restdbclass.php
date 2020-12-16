@@ -11,7 +11,7 @@ $obj =  array("name" => "ไพศาล");
 $return = $test->selectDocument($collectionName, $obj);
 print_r($return);
 */
-
+ echo "from RestDB";
 class RestDB {
 
     CONST APIDB = 'apidb';
