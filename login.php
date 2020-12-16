@@ -46,7 +46,7 @@ $collectionName = "mibnmanager";
 $obj =  array("username" => $param_username);
 $return = $data->selectDocument($collectionName, $obj);
 print_r($return);
-     
+     exit;
      $isData=sizeof($return);
      if($isData >0){
         // มีข้อมูลผู้ใช้อยู่
