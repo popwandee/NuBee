@@ -34,20 +34,15 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
          $datetime = new DateTime();
          $datetime->setTimezone($tz_object);
          $dateTimeToday = $datetime->format('Y-m-d');
-	 if(!isset($_POST['dateGetCoupon'])){
-		 $dateGetCoupon=$dateTimeToday;
-	 }else{
-		$dateGetCoupon=$_POST['dateGetCoupon'];
-	 }
+
 	?>
 
     <!-- container -->
     <div class="container">
 
         <div class="page-header">
-		<table><tr><td><img src="mibnlogo.png" width="50"></td><td> <h1>รายการรับคูปองสำหรับวันที่ <?php echo $dateGetCoupon;?> </h1></td></tr></table>
+		<table><tr><td><img src="mibnlogo.png" width="50"></td><td> <h1>รายชื่อกำลังพลของหน่วย </h1></td></tr></table>
         </div>
-      <a href='listman.php' class='btn btn-primary m-r-1em'>รายชื่อกำลังพล</a>
      <a href='search.php' class='btn btn-primary m-r-1em'>ค้นหา</a>
 	    <a href='newcoupon.php' class='btn btn-primary m-r-1em'>ลงทะเบียนรับคูปอง</a>
 	    <a href='logout.php' class='btn btn-danger'>Logout</a>
@@ -65,8 +60,8 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
          <?php
  $message = isset($_GET['message']) ? $_GET['message'] : "";
 	    echo $message;
-        $collectionName = "coupon";
-        $obj = '{"dateGetCoupon":"'.$dateTimeToday.'"}';
+        $collectionName = "mibnpeople";
+        $obj = '';
 
          $coupon = new RestDB();
          $res = $coupon->selectDocument($collectionName,$obj);
@@ -78,41 +73,24 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
     echo "<tr>";
         echo "<th>ลำดับ</th>";
         echo "<th>ยศ ชื่อ สกุล</th>";
-        echo "<th>คูปอง</th>";
-        echo "<th>Action</th>";
     echo "</tr>";
 
     // retrieve our table contents
-    $id=0;
 foreach($res as $rec){
-        $_id=$rec['_id'];
-        $id++;
-        $name=$rec['name'];
-		$coupon_id=$rec['coupon_id'];
-		$dateGetCoupon=$rec['dateGetCoupon'];
+        $id=$rec['id'];
+        $name=$rec['rank'].' '.$rec['name'].' '.$rec['lastname'];
 
 
     // creating new table row per record
     echo "<tr>";
         echo "<td>{$id}</td>";
         echo "<td>{$name}</td>";
-        echo "<td>{$coupon_id}</td>";
-        echo "<td>";
-            // we will use this links on next part of this post
-	$del_url="delete.php?id=".$_id;
-            echo "<a href='$del_url'>Delete</a>";
-        echo "</td>";
     echo "</tr>";
 }
 
 // end table
 echo "</table>";
-
-  }// if no records found
-else{
-    echo "<div align='center' class='alert alert-danger'>ยังไม่มีใครได้รับคูปองในวันนี้.</div>";
 }
-
          ?>
     </div> <!-- end .container -->
 
