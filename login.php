@@ -4,7 +4,8 @@ session_start();
 
 // Check if the user is already logged in, if yes then redirect him to welcome page
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location: index.php");
+    //header("location: index.php");
+ echo "<br>go to index.php";
     exit;
 }
 
@@ -23,14 +24,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty(trim($_POST["username"]))){
         $username_err = "กรุณากรอกข้อมูล username.";
     } else{
-        $username = trim($_POST["username"]);
+        $username = trim($_POST["username"]);echo "<br>username is ".$username;
     }
 
     // Check if password is empty
     if(empty(trim($_POST["password"]))){
-        $password_err = "กรุณากรอกข้อมูล password.";
+        $password_err = "กรุณากรอกข้อมูล password."; echo "<br>empty password, password_err is ".$password_err;
     } else{
-        $password = trim($_POST["password"]);
+        $password = trim($_POST["password"]);echo "<br>password is ".$password;
         //$hashed_password = password_hash($password, PASSWORD_DEFAULT);
     }
 
