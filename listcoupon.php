@@ -66,7 +66,7 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
  $message = isset($_GET['message']) ? $_GET['message'] : "";
 	    echo $message;
         $collectionName = "coupon";
-        $obj = '{"dateGetCoupon":"'.$dateTimeToday.'"}';
+        $obj = '{"dateGetCoupon":"'.$dateGetCoupon.'"}';
 
          $coupon = new RestDB();
          $res = $coupon->selectDocument($collectionName,$obj);
