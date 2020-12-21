@@ -43,7 +43,6 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
 
     <!-- container -->
     <div class="container">
-
         <div class="page-header">
 		<table><tr><td><img src="mibnlogo.png" width="50"></td><td> <h1>รายการรับคูปองสำหรับวันที่ <?php echo $dateGetCoupon;?> </h1></td></tr></table>
         </div>
@@ -62,14 +61,14 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
 </form>
 
 	    <!-- PHP code to read records will be here -->
-         <?php
- $message = isset($_GET['message']) ? $_GET['message'] : "";
+        <?php
+        $message = isset($_GET['message']) ? $_GET['message'] : "";
 	    echo $message;
         $collectionName = "coupon";
         $obj = '{"dateGetCoupon":"'.$dateGetCoupon.'"}';
 
-         $coupon = new RestDB();
-         $res = $coupon->selectDocument($collectionName,$obj);
+        $coupon = new RestDB();
+        $res = $coupon->selectDocument($collectionName,$obj);
 
   if($res){
 
@@ -91,7 +90,6 @@ foreach($res as $rec){
 		$coupon_id=$rec['coupon_id'];
 		$dateGetCoupon=$rec['dateGetCoupon'];
 
-
     // creating new table row per record
     echo "<tr>";
         echo "<td>{$id}</td>";
@@ -101,6 +99,12 @@ foreach($res as $rec){
             // we will use this links on next part of this post
 	$del_url="delete.php?id=".$_id;
             echo "<a href='$del_url'>Delete</a>";
+        echo "</td>";
+
+        echo "<td>";
+            // we will use this links on next part of this post
+	$deactive_url="deactive.php?id=".$_id;
+            echo "<a href='$deactive_url'>Delete</a>";
         echo "</td>";
     echo "</tr>";
 }
