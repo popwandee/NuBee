@@ -52,7 +52,6 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
       <a href='listman.php' class='btn btn-primary m-r-1em'>รายชื่อกำลังพล</a>
      <a href='search.php' class='btn btn-primary m-r-1em'>ค้นหา</a>
 	    <a href='newcoupon.php' class='btn btn-primary m-r-1em'>ลงทะเบียนรับคูปอง</a>
-   	    <a href='notreturncoupon.php' class='btn btn-primary m-r-1em'>คูปองที่ยังไม่ส่งคืน</a>
 	    <a href='logout.php' class='btn btn-danger'>Logout</a>
          <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
     <table class='table table-hover table-responsive table-bordered'>
@@ -69,7 +68,7 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
         $message = isset($_GET['message']) ? $_GET['message'] : "";
 	    echo $message;
         $collectionName = "coupon";
-        $obj = '{"dateGetCoupon":"'.$dateGetCoupon.'"}';
+        $obj = '{"statusCoupon":"ยังไม่ส่งคืน"}';
 
         $coupon = new RestDB();
         $res = $coupon->selectDocument($collectionName,$obj);
@@ -111,10 +110,10 @@ foreach($res as $rec){
         }
         echo "<td>";
         if($statusCoupon=="ยังไม่ส่งคืน"){
-            $deactive_url="deactive.php?statusCoupon=ส่งคืนแล้ว&id=".$_id;
+            $deactive_url="deactive.php?statusCoupon=ส่งคืนแล้ว&id=".$_id."&target=notreturncoupon";
             echo "<a href='$deactive_url'><font color='Green'>ส่งคืน Coupon แล้ว</color></font></a>";
         }else{
-            $deactive_url="deactive.php?statusCoupon=ยังไม่ส่งคืน&id=".$_id;
+            $deactive_url="deactive.php?statusCoupon=ยังไม่ส่งคืน&id=".$_id."&target=notreturncoupon";
             echo "<a href='$deactive_url'><font color='Orange'>แก้ไข/ยังไม่ส่งคืน</font></a>";
         }
         echo "</td>";

@@ -9,6 +9,7 @@ try {
     // isset() is a PHP function used to verify if a value is there or not
     $id=isset($_GET['id']) ? $_GET['id'] : die('ERROR: Record ID not found.');
     $statusCoupon=isset($_GET['statusCoupon']) ? $_GET['statusCoupon'] : "ส่งคืนแล้ว";
+    $target=isset($_GET['target']) ? $_GET['target'] : "listcoupon";
 
     // delete query
     $collectionName = "coupon";
@@ -26,9 +27,9 @@ try {
         if(!empty($res)){
 		  // redirect to read records page and
         	// tell the user record was deleted
-       		 header('Location: listcoupon.php?message=updated');
+       		 header('Location: '.$target.'.php?message=updated');
 	        }else{
-		     header('Location: listcoupon.php?message=CannotUpdated');
+		     header('Location: '.$target.'.php?message=CannotUpdated');
                  }
 }
 
