@@ -19,13 +19,11 @@ require_once "vendor/restdbclass.php";
 
     <!-- Latest compiled and minified Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-
 </head>
 <body>
 
     <!-- container -->
     <div class="container">
-
         <div class="page-header">
             <table><tr><td><img src="mibnlogo.png" width="50"></td><td> <h1>ลงทะเบียนรับคูปอง</h1></td></tr></table>
         </div>
@@ -41,7 +39,7 @@ if(isset($_POST['coupon_id'])&&(isset($_POST['name']))){
 
 // นำข้อมูลเข้าเก็บในฐานข้อมูล
 $collectionName = "coupon";
-$obj =   '{"name":"'.$name.'","coupon_id":"'.$coupon_id.'","dateGetCoupon":"'.$dateTimeToday.'"}';
+$obj =   '{"name":"'.$name.'","coupon_id":"'.$coupon_id.'","dateGetCoupon":"'.$dateTimeToday.'", "statusCoupon":"ยังไม่ส่งคืน"}';
 
 $coupon = new RestDB();
 $returnValue = $coupon->insertDocument($collectionName,$obj);

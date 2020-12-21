@@ -127,19 +127,21 @@ class RestDB {
     public function deleteDocument($collectionName, $objectId)
     {
         $url = $this->apiurl.$collectionName.'/'.$objectId;
-        $ch = curl_init($url);
+        $ch = curl_init($url);echo "<br>URL is ".$url;
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json','x-apikey:'.self::APIKEY) );
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         $return_data = curl_exec($ch);
         curl_close($ch);
         $retVal = json_decode($return_data ,TRUE);
-
+        echo "<br> return_data is "; print_r($return_data);
         if(!empty($retVal['result'][0]))
         {
-            return $retVal['result'][0]; // RECORD DELETED, RETURN ID
+            //echo "<br>RECORD DELETED, RETURN ID";
+            return $retVal['result'][0];
         }
-        return 0; //RECORD NOT DELETED
+         //echo "<br>RECORD NOT DELETED";
+        return 0;
     }
 
 }//END CLASS

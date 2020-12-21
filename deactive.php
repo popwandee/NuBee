@@ -8,19 +8,27 @@ try {
     // get record ID
     // isset() is a PHP function used to verify if a value is there or not
     $id=isset($_GET['id']) ? $_GET['id'] : die('ERROR: Record ID not found.');
+    $statusCoupon=isset($_GET['statusCoupon']) ? $_GET['statusCoupon'] : "ส่งคืนแล้ว";
 
     // delete query
     $collectionName = "coupon";
+    $objectId = $id;
+    if($statusCoupon=="ส่งคืนแล้ว"){
+        $obj =  array("statusCoupon" => "ส่งคืนแล้ว");
+    }else{
+        $obj =  array("statusCoupon" => "ยังไม่ส่งคืน");
+    }
+
 
     $coupon = new RestDB();
-    $res = $coupon->deleteDocument($collectionName,$id);
+    $res = $coupon->updateDocument($collectionName, $objectId, $obj);
 
         if(!empty($res)){
 		  // redirect to read records page and
         	// tell the user record was deleted
-       		 header('Location: listcoupon.php?message=deleted');
+       		 header('Location: listcoupon.php?message=updated');
 	        }else{
-		     header('Location: listcoupon.php?message=CannotDeleted');
+		     header('Location: listcoupon.php?message=CannotUpdated');
                  }
 }
 

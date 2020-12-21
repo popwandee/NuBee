@@ -34,10 +34,13 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
          $datetime = new DateTime();
          $datetime->setTimezone($tz_object);
          $dateTimeToday = $datetime->format('Y-m-d');
-	 if(!isset($_POST['dateGetCoupon'])){
-		 $dateGetCoupon=$dateTimeToday;
-	 }else{
-		$dateGetCoupon=$_POST['dateGetCoupon'];
+	 if(isset($_POST['dateGetCoupon'])){
+    	$dateGetCoupon = $_POST['dateGetCoupon'];
+        $_SESSION['dateGetCoupon'] = $dateGetCoupon;
+	 }elseif(isset($_SESSION['dateGetCoupon'])){
+        $dateGetCoupon = $_SESSION['dateGetCoupon'];
+     }else{
+        $dateGetCoupon = $dateTimeToday;
 	 }
 	?>
 
@@ -77,8 +80,10 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
     echo "<tr>";
         echo "<th>ลำดับ</th>";
         echo "<th>ยศ ชื่อ สกุล</th>";
-        echo "<th>คูปอง</th>";
-        echo "<th>Action</th>";
+        echo "<th>หมายเลขคูปอง</th>";
+        echo "<th>สถานะคูปอง</th>";
+        echo "<th>ส่งคืนคูปอง</th>";
+        echo "<th>ผิดพลาดลบออก</th>";
     echo "</tr>";
 
     // retrieve our table contents
@@ -88,6 +93,7 @@ foreach($res as $rec){
         $id++;
         $name=$rec['name'];
 		$coupon_id=$rec['coupon_id'];
+		$statusCoupon=$rec['statusCoupon'];
 		$dateGetCoupon=$rec['dateGetCoupon'];
 
     // creating new table row per record
@@ -95,20 +101,25 @@ foreach($res as $rec){
         echo "<td>{$id}</td>";
         echo "<td>{$name}</td>";
         echo "<td>{$coupon_id}</td>";
+        if($statusCoupon=="ยังไม่ส่งคืน"){
+            echo "<td bgcolor='Red'><font color='white'>ยังไม่ส่งคืน Coupon</font></td>";
+        }else{
+            echo "<td bgcolor='Green'><font color='white'>ส่งคืนแล้ว</font></td>";
+        }
         echo "<td>";
+        if($statusCoupon=="ยังไม่ส่งคืน"){
+            $deactive_url="deactive.php?statusCoupon=ส่งคืนแล้ว&id=".$_id;
+            echo "<a href='$deactive_url'><font color='Green'>ส่งคืน Coupon แล้ว</color></font></a>";
+        }else{
+            $deactive_url="deactive.php?statusCoupon=ยังไม่ส่งคืน&id=".$_id;
+            echo "<a href='$deactive_url'><font color='Orange'>แก้ไข/ยังไม่ส่งคืน</font></a>";
+        }
+        echo "</td>";
             // we will use this links on next part of this post
 	$del_url="delete.php?id=".$_id;
-            echo "<a href='$del_url'>Delete</a>";
-        echo "</td>";
-
-        echo "<td>";
-            // we will use this links on next part of this post
-	$deactive_url="deactive.php?id=".$_id;
-            echo "<a href='$deactive_url'>Delete</a>";
-        echo "</td>";
+            echo "<td><a href='$del_url'><font color='Red'>ลบออก</font></a></td>";
     echo "</tr>";
 }
-
 // end table
 echo "</table>";
 
@@ -116,8 +127,7 @@ echo "</table>";
 else{
     echo "<div align='center' class='alert alert-danger'>ยังไม่มีใครได้รับคูปองในวันนี้.</div>";
 }
-
-         ?>
+?>
     </div> <!-- end .container -->
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
