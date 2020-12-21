@@ -90,8 +90,8 @@ $returnValue = $coupon->insertDocument($collectionName,$obj);
 
         if($returnValue){
 		   $message= "<div align='center' class='alert alert-success'>บันทึกการรับคูปองของ ".$name." หมายเลขคูปอง ".$coupon_id." เรียบร้อย</div>";
-		   echo $message;
-
+		   $_SESSION["message"]=$message;
+           header("location: search.php");
 	        }else{
 		   $message= "<div align='center' class='alert alert-danger'>ไม่สามารถบันทึกได้</div>";
 		echo $message;
