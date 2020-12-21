@@ -43,9 +43,12 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
         <div class="page-header">
 		<table><tr><td><img src="mibnlogo.png" width="50"></td><td> <h1>รายชื่อกำลังพลของหน่วย </h1></td></tr></table>
         </div>
-     <a href='search.php' class='btn btn-primary m-r-1em'>ค้นหา</a>
-	    <a href='newcoupon.php' class='btn btn-primary m-r-1em'>ลงทะเบียนรับคูปอง</a>
-	    <a href='logout.php' class='btn btn-danger'>Logout</a>
+        <a href='listman.php' class='btn btn-primary m-r-1em'>รายชื่อกำลังพล</a>
+        <a href='search.php' class='btn btn-primary m-r-1em'>ค้นหา</a>
+        <a href='newcoupon.php' class='btn btn-primary m-r-1em'>ลงทะเบียนรับคูปอง</a>
+        <a href='listcoupon.php' class='btn btn-primary m-r-1em'>คูปองที่รับไปแล้ว</a>
+        <a href='notreturncoupon.php' class='btn btn-primary m-r-1em'>คูปองที่ยังไม่ส่งคืน</a>
+        <a href='logout.php' class='btn btn-danger'>Logout</a>
          <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
     <table class='table table-hover table-responsive table-bordered'>
         <tr>

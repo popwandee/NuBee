@@ -57,7 +57,6 @@ $returnValue = $coupon->insertDocument($collectionName,$obj);
     			exit;
         // ยังไม่มีการโพสต์ข้อมูลจากแบบฟอร์ม
     }else{
-        echo "<div align='center' class='alert alert-success'>".$dateTimeToday."</div>";
 
 	// กรณีค้นหาจากหมายเลข
 	if((isset($_POST['personel_id']))&&(!empty($_POST['personel_id']))){
@@ -108,17 +107,20 @@ $returnValue = $coupon->insertDocument($collectionName,$obj);
 }  // end of if(isset($_POST['coupon_id'])&&isset($_POST['name']))
 
 ?>
-
-
 <a href='listman.php' class='btn btn-primary m-r-1em'>รายชื่อกำลังพล</a>
-      <a href='search.php' class='btn btn-primary m-r-1em'>ค้นหา</a>
-	    <a href='listcoupon.php' class='btn btn-primary m-r-1em'>คูปองที่รับไปแล้ว</a>
-	    <a href='logout.php' class='btn btn-danger'>Logout</a>
+<a href='search.php' class='btn btn-primary m-r-1em'>ค้นหา</a>
+<a href='newcoupon.php' class='btn btn-primary m-r-1em'>ลงทะเบียนรับคูปอง</a>
+<a href='listcoupon.php' class='btn btn-primary m-r-1em'>คูปองที่รับไปแล้ว</a>
+<a href='notreturncoupon.php' class='btn btn-primary m-r-1em'>คูปองที่ยังไม่ส่งคืน</a>
+<a href='logout.php' class='btn btn-danger'>Logout</a>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
     <table class='table table-hover table-responsive table-bordered'>
 
-
-        <tr>
+<tr>
+    <td>วันที่</td>
+    <td><input type='text' name='name' value="<?php echo $dateTimeToday;?>" class='form-control' /></td>
+</tr>
+<tr>
             <td>ยศ ชื่อ สกุล</td>
             <td><input type='text' name='name' value="<?php echo $name;?>" class='form-control' /></td>
         </tr>
