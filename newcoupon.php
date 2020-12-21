@@ -89,16 +89,15 @@ $coupon = new RestDB();
 $returnValue = $coupon->insertDocument($collectionName,$obj);
 
         if($returnValue){
-		   $message= "<div align='center' class='alert alert-success'>บันทึกการรับคูปองของ ".$name." หมายเลขคูปอง ".$coupon_id." เรียบร้อย</div>";
-		   $_SESSION["message"]=$message;
-           header("location: search.php");
+		          $message= "<div align='center' class='alert alert-success'>บันทึกการรับคูปองของ ".$name." หมายเลขคูปอง ".$coupon_id." เรียบร้อย</div>";
+		         echo $message;
 	        }else{
 		   $message= "<div align='center' class='alert alert-danger'>ไม่สามารถบันทึกได้</div>";
-		echo $message;
+		         echo $message;
                  }
 			$_SESSION["message"]=$message;
-		   	header("location: search.php");
-    			exit;
+		   	echo "<br><a href='search.php'>ค้นหาเพื่อลงทะเบียนใหม่</a>";
+    			//exit;
         // ยังไม่มีการโพสต์ข้อมูลจากแบบฟอร์ม
     }else{
 
