@@ -7,6 +7,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: login.php");
     exit;
 }
+$userinfo = isset($_SESSION["userinfo"]) ? $_SESSION["userinfo"] : "";
+$admin = isset($userinfo['user_autho']['admin']) ? $userinfo['user_autho']['admin'] : false ;
 // Include config file
 require_once "config.php";
 require_once "vendor/restdbclass.php";
@@ -87,13 +89,13 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
 
 	    <!-- PHP code to read records will be here -->
          <?php
- $message = isset($_GET['message']) ? $_GET['message'] : "";
+         $message = isset($_GET['message']) ? $_GET['message'] : "";
 	    echo $message;
         $collectionName = "mibnpeople";
-        $obj = '';
-
-         $coupon = new RestDB();
-         $res = $coupon->selectDocument($collectionName,$obj);
+        $obj = '{}';
+        $sort= 'id';
+        $coupon = new RestDB();
+        $res = $coupon->selectDocument($collectionName,$obj,$sort);
 
   if($res){
 
@@ -102,25 +104,87 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
     echo "<tr>";
         echo "<th>ลำดับ</th>";
         echo "<th>ยศ ชื่อ สกุล</th>";
-    echo "</tr>";
+        echo "<th>สังกัด</th>";
+        echo "<th>หมายเลขข้าราชการ</th>";
+        echo "<th>หมายเลขประชาชน</th>";
+        echo "<th>เลขสมาชิก บรข.</th>";
+        echo "<th>Email</th>";
+        echo "<th>Admin</th><th>Coupon Manager</th><th>Vrun Manager</th><th>BRK Manager</th><th>Club Manager</th>";
 
+        if($admin){
+            echo "<th>Update</th>";
+            }
+    echo "</tr>";
     // retrieve our table contents
 foreach($res as $rec){
+        $objectId=$rec['_id'];
         $id=$rec['id'];
         $name=$rec['rank'].' '.$rec['name'].' '.$rec['lastname'];
-
-
+        $org=$rec['org'];
+        $government_id=$rec['government_id'];
+        $national_id=$rec['national_id'];
+        $brkfund_id = isset($rec['brkfund_id']) ? $rec['brkfund_id'] : "";
+        $username = isset($rec['username']) ? $rec['username'] : "";
+        $isadmin = isset($rec['admin']) ? $rec['admin'] : false;
+        $coupon_manager = isset($rec['coupon_manager']) ? $rec['coupon_manager'] : false;
+        $virtualrun_manager = isset($rec['virtualrun_manager']) ? $rec['virtualrun_manager'] : false;
+        $brkfund_manager = isset($rec['brkfund_manager']) ? $rec['brkfund_manager'] : false;
+        $club_manager = isset($rec['club_manager']) ? $rec['club_manager'] : false;
+        $email = isset($rec['email']) ? $rec['email'] : "";
+        $password = isset($rec['password']) ? $rec['password'] : "";
     // creating new table row per record
-    echo "<tr>";
-        echo "<td>{$id}</td>";
-        echo "<td>{$name}</td>";
+
+    echo "<tr>"; ?>
+
+            <td><?php echo $id;?></td>
+            <td><?php echo $name;?></td>
+            <td><?php echo $org;?></td>
+            <td><?php echo $government_id;?></td>
+            <td><?php echo $national_id;?></td>
+            <td><?php echo $brkfund_id;?></td>
+            <td><?php echo $email;?></td>
+            <td><input type="checkbox" name="isadmin" <?php if($isadmin){ echo "checked";}?>></td>
+            <td><input type="checkbox" name="coupon_manager" <?php if($coupon_manager){ echo "checked";}?>></td>
+            <td><input type="checkbox" name="virtualrun_manager" <?php if($virtualrun_manager){ echo "checked";}?>></td>
+            <td><input type="checkbox" name="brkfund_manager" <?php if($brkfund_manager){ echo "checked";}?>></td>
+            <td><input type="checkbox" name="club_manager" <?php if($club_manager){ echo "checked";}?>></td>
+            <?php if($admin){ ?>
+                <td><a href='updateman.php?userid=<?php echo $objectId;?>'>Update</a></td>
+                <?php
+        }
     echo "</tr>";
-}
+}// end foreache people
 
 // end table
 echo "</table>";
-}
-         ?>
+}// end of get data from databases
+
+// add new people
+$id++;
+if($userinfo['user_autho']['admin']=='admin'){
+?>
+<form action="newman.php" method="post">
+    <table class='table table-hover table-responsive table-bordered'>
+        <tr align='center'>
+            <td>ลำดับที่</td><td>ยศ</td><td>ชื่อ</td><td>นามสกุล</td><td>สังกัด</td>
+            <td>หมายเลขข้าราชการ</td><td>หมายเลขประชาชน</td><td>Email</td><td>Password</td><td>บันทึก</td></tr>
+            <tr>
+            <td><input type='text' name='man_id' value='<?php echo $id;?>' class='form-control' /></td>
+            <td><input type='text' name='rank' class='form-control' /></td>
+            <td><input type='text' name='name' class='form-control' /></td>
+            <td><input type='text' name='lastname' class='form-control' /></td>
+            <td><input type='text' name='org' class='form-control' /></td>
+            <td><input type='text' name='government_id' class='form-control' /></td>
+            <td><input type='text' name='national_id' class='form-control' /></td>
+            <td><input type='text' name='email' class='form-control' /></td>
+            <td><input type='text' name='password' class='form-control' /></td>
+            <td><input type='submit' value='บันทึก' class='btn btn-primary' /></td>
+        </tr>
+    </table>
+</form>
+<?php
+} // end is admin or not
+ ?>
     </div> <!-- end .container -->
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

@@ -61,14 +61,15 @@ class RestDB {
      * $collectionName = "MyFriends";
      * $obj =  array("email" => "Denis.Crowley@gmail.com");
      */
-    public function selectDocument($collectionName, $obj)
+    public function selectDocument($collectionName, $obj,$sort="")
     {
 
         //$post_vars = json_encode($obj);
         $post_vars = $obj;
         $queryString = http_build_query( ['q'=>$post_vars] );
+        //$sort = isset($sort) ? $sort : "";
 
-        $url = $this->apiurl.$collectionName .'?'.$queryString;
+        $url = $this->apiurl.$collectionName .'?'.$queryString.'&sort='.$sort;
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json','x-apikey:'.self::APIKEY) );
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
@@ -98,9 +99,13 @@ class RestDB {
         {
            $obj = array();
         }
+
         $post_vars = json_encode($obj);
+
         $url = $this->apiurl.$collectionName.'/'.$objectId;
+
         $ch = curl_init($url);
+
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json','x-apikey:'.self::APIKEY) );
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
         curl_setopt($ch, CURLOPT_POSTFIELDS, $post_vars);

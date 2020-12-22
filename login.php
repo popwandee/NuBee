@@ -14,17 +14,17 @@ require_once "config.php";
 require_once "vendor/restdbclass.php";
 
 // Define variables and initialize with empty values
-$username = $password = "";
-$username_err = $password_err = "";
+$email = $password = "";
+$email_err = $password_err = "";
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     // Check if username is empty
-    if(empty(trim($_POST["username"]))){
-        $username_err = "กรุณากรอกข้อมูล username.";
+    if(empty(trim($_POST["email"]))){
+        $email_err = "กรุณากรอกข้อมูล Email.";
     } else{
-        $username = trim($_POST["username"]);echo "<br>username is ".$username;
+        $email = trim($_POST["email"]);echo "<br>Email is ".$email;
     }
 
     // Check if password is empty
@@ -36,14 +36,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 
     // Validate credentials
-    if(empty($username_err) && empty($password_err)){
+    if(empty($email_err) && empty($password_err)){
 
      // Set parameters
-     $param_username = $username;
+     $param_email = $email;
 
      // Check if username exists, if yes then verify password
-     $collectionName = "mibnmanager";
-     $obj =  '{"username":{"$regex":"'.$param_username.'"}}';
+     $collectionName = "mibnpeople";
+     $obj =  '{"email":{"$regex":"'.$param_email.'"}}';
       $man = new RestDB();
       $res = $man->selectDocument($collectionName,$obj);
 
@@ -53,15 +53,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
      if($res){
         // มีข้อมูลผู้ใช้อยู่
      foreach($res as $rec){
-
-        $username=$rec['username'];
+        $email=$rec['email'];
         $hashed_password=$rec['password'];
+        $userinfo['name']=$rec['rank'].' '.$rec['name'].' '.$rec['lastname'];
+        $userinfo['email']=$rec['email'];
+        $userinfo['user_autho']['admin']=$rec['admin'];
+        $userinfo['user_autho']['coupon_manager']=$rec['coupon_manager'];
+        $userinfo['user_autho']['virtualrun_manager']=$rec['virtualrun_manager'];
+        $userinfo['user_autho']['brkfund_manager']=$rec['brkfund_manager'];
+        $userinfo['user_autho']['club_manager']=$rec['club_manager'];
          }
        if(password_verify($password, $hashed_password)){
 
                             // Store data in session variables
                             $_SESSION["loggedin"] = true;
-                            $_SESSION["username"] = $username;
+                            $_SESSION["email"] = $email;
+                            $_SESSION["userinfo"] = $userinfo;
 
                             // Redirect user to welcome page
                             header("location: index.php");
@@ -70,12 +77,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $password_err = "รหัสผ่านไม่ถูกต้อง";
                         }
       }else{
-      $username_err = "ไม่มีข้อมูล Username นี้ครับ";
+      $email_err = "ไม่มีข้อมูล Email นี้ครับ";
 }
 
 
     }else{
-     echo "กรุณากรอกข้อมูล Username และ Password";
+     echo "กรุณากรอกข้อมูล Email และ Password";
     }
 
 
@@ -102,10 +109,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
         <p>กรุณากรอกข้อมูลเพื่อ login.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-                <label>Username</label>
-                <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
-                <span class="help-block"><?php echo $username_err; ?></span>
+            <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
+                <label>Email</label>
+                <input type="text" name="email" class="form-control" value="<?php echo $email; ?>">
+                <span class="help-block"><?php echo $email_err; ?></span>
             </div>
             <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
                 <label>Password</label>

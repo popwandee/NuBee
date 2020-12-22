@@ -78,19 +78,35 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
      }else{
         $dateGetCoupon = $dateTimeToday;
 	 }
+     if(isset($_POST['coupon_id'])){
+         $coupon_id= $_POST['coupon_id'];
+         $obj = '{"dateGetCoupon":"'.$dateGetCoupon.'","coupon_id":'.$coupon_id.'}';
+     }else{
+         $obj = '{"dateGetCoupon":"'.$dateGetCoupon.'"}';
+     }
+
 	?>
 
     <!-- container -->
+
     <div class="container">
-        
-         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-    <table class='table table-hover table-responsive table-bordered'>
-        <tr>
-            <td>ค้นหาวันที่ (yyyy-mm-dd)</td>
-            <td><input type='text' name='dateGetCoupon' class='form-control' /></td>
-            <td><input type='submit' value='ค้นหา' class='btn btn-primary' /></td>
-        </tr>
-    </table>
+
+<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+<div class="form-row align-items-center">
+    <div class="form-group row">
+      <div class="form-group col-md-2">
+        <label class="sr-only" for="dateGetCoupon">ค้นหาวันที่ (yyyy-mm-dd)</label>
+        <input type="text" class="form-control" name="dateGetCoupon" id="dateGetCoupon" placeholder="ค้นหาวันที่ (yyyy-mm-dd)">
+      </div>
+      <div class="form-group col-md-2">
+        <label class="sr-only" for="coupon_id">Coupon</label>
+        <input type="text" class="form-control" name="coupon_id" id="coupon_id" placeholder="Coupon">
+      </div>
+      <div class="form-group col-md-2">
+        <button type="submit" class="btn btn-primary mb-2">Submit</button>
+      </div>
+    </div>
+</div>
 </form>
 
 	    <!-- PHP code to read records will be here -->
@@ -98,10 +114,9 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
         $message = isset($_GET['message']) ? $_GET['message'] : "";
 	    echo $message;
         $collectionName = "coupon";
-        $obj = '{"dateGetCoupon":"'.$dateGetCoupon.'"}';
-
+        $sort= 'coupon_id';
         $coupon = new RestDB();
-        $res = $coupon->selectDocument($collectionName,$obj);
+        $res = $coupon->selectDocument($collectionName,$obj,$sort);
 
   if($res){
 

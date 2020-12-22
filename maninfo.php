@@ -7,6 +7,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: login.php");
     exit;
 }
+$userinfo = isset($_SESSION["userinfo"]) ? $_SESSION["userinfo"] : "";
+
 // Include config file
 require_once "config.php";
 require_once "vendor/restdbclass.php";
@@ -70,14 +72,7 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
          $datetime = new DateTime();
          $datetime->setTimezone($tz_object);
          $dateTimeToday = $datetime->format('Y-m-d');
-	 if(isset($_POST['dateGetCoupon'])){
-    	$dateGetCoupon = $_POST['dateGetCoupon'];
-        $_SESSION['dateGetCoupon'] = $dateGetCoupon;
-	 }elseif(isset($_SESSION['dateGetCoupon'])){
-        $dateGetCoupon = $_SESSION['dateGetCoupon'];
-     }else{
-        $dateGetCoupon = $dateTimeToday;
-	 }
+
 	?>
 
     <!-- container -->
@@ -93,72 +88,37 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
 </form>
 
 	    <!-- PHP code to read records will be here -->
-        <?php
-        $message = isset($_GET['message']) ? $_GET['message'] : "";
+         <?php
+ $message = isset($_GET['message']) ? $_GET['message'] : "";
 	    echo $message;
-        $collectionName = "coupon";
-        $obj = '{"statusCoupon":"ยังไม่ส่งคืน"}';
-        $sort= 'coupon_id';
-        $coupon = new RestDB();
-        $res = $coupon->selectDocument($collectionName,$obj,$sort);
+        //$collectionName = "mibnpeople";
+        //$obj = '{}';
+        //$sort= 'id';
+        //$coupon = new RestDB();
+        //$res = $coupon->selectDocument($collectionName,$obj,$sort);
 
-  if($res){
-
-      echo "<table class='table table-hover table-responsive table-bordered'>";//start table
-    //creating our table heading
-    echo "<tr>";
-        echo "<th>ลำดับ</th>";
-        echo "<th>ยศ ชื่อ สกุล</th>";
-        echo "<th>หมายเลขคูปอง</th>";
-        echo "<th>วันที่รับคูปอง</th>";
-        echo "<th>สถานะคูปอง</th>";
-        echo "<th>ส่งคืนคูปอง</th>";
-        echo "<th>ผิดพลาดลบออก</th>";
-    echo "</tr>";
-
-    // retrieve our table contents
-    $id=0;
-foreach($res as $rec){
-        $_id=$rec['_id'];
-        $id++;
-        $name=$rec['name'];
-		$coupon_id=$rec['coupon_id'];
-		$statusCoupon=$rec['statusCoupon'];
-		$dateGetCoupon=$rec['dateGetCoupon'];
-
-    // creating new table row per record
-    echo "<tr>";
-        echo "<td>{$id}</td>";
-        echo "<td>{$name}</td>";
-        echo "<td>{$coupon_id}</td>";
-        echo "<td>{$dateGetCoupon}</td>";
-        if($statusCoupon=="ยังไม่ส่งคืน"){
-            echo "<td bgcolor='Red'><font color='white'>ยังไม่ส่งคืน Coupon</font></td>";
+        if($userinfo){
+            echo "<br>yes<br>";
+            print_r($userinfo);
+            if($userinfo['user_autho']['admin']){
+                echo "<br>you are system admin.";
+            }
+            if($userinfo['user_autho']['coupon_manager']){
+                echo "<br>you are coupon manager.";
+            }
+            if($userinfo['user_autho']['virtualrun_manager']){
+                echo "<br>you are virtualrun manager.";
+            }
+            if($userinfo['user_autho']['brkfund_manager']){
+                echo "<br>you are BRK fund manager.";
+            }
+            if($userinfo['user_autho']['club_manager']){
+                echo "<br>you are Club manager.";
+            }
         }else{
-            echo "<td bgcolor='Green'><font color='white'>ส่งคืนแล้ว</font></td>";
+            echo "no";
         }
-        echo "<td>";
-        if($statusCoupon=="ยังไม่ส่งคืน"){
-            $deactive_url="deactive.php?statusCoupon=ส่งคืนแล้ว&id=".$_id."&target=notreturncoupon";
-            echo "<a href='$deactive_url'><font color='Green'>ส่งคืน Coupon แล้ว</color></font></a>";
-        }else{
-            $deactive_url="deactive.php?statusCoupon=ยังไม่ส่งคืน&id=".$_id."&target=notreturncoupon";
-            echo "<a href='$deactive_url'><font color='Orange'>แก้ไข/ยังไม่ส่งคืน</font></a>";
-        }
-        echo "</td>";
-            // we will use this links on next part of this post
-	$del_url="delete.php?id=".$_id;
-            echo "<td><a href='$del_url'><font color='Red'>ลบออก</font></a></td>";
-    echo "</tr>";
-}
-// end table
-echo "</table>";
-
-  }// if no records found
-else{
-    echo "<div align='center' class='alert alert-danger'>ยังไม่มีใครได้รับคูปองในวันนี้.</div>";
-}
-?>
+ ?>
     </div> <!-- end .container -->
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
