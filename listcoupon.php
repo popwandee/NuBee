@@ -78,7 +78,9 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
      }else{
         $dateGetCoupon = $dateTimeToday;
 	 }
-     if(isset($_POST['coupon_id'])){
+
+     $coupon_id = isset($_POST['coupon_id']) ? $_POST['coupon_id'] : "";
+     if($coupon_id!==""){
          $coupon_id= $_POST['coupon_id'];
          $obj = '{"dateGetCoupon":"'.$dateGetCoupon.'","coupon_id":'.$coupon_id.'}';
      }else{
