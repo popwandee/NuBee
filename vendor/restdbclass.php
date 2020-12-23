@@ -14,7 +14,7 @@
 class RestDB {
 
     CONST APIDB = 'area51-dfba';
-    CONST APIKEY = '5fd9fb83ff9d670638140649';
+    CONST APIKEY = '';
 
     private $apiurl = '';
 
