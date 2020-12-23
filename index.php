@@ -7,6 +7,15 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: login.php");
     exit;
 }
+$userinfo = isset($_SESSION["userinfo"]) ? $_SESSION["userinfo"] : "";
+$userid = isset($userinfo["userid"]) ? $userinfo["userid"] : "";
+$name=isset($userinfo["name"]) ? $userinfo["name"] : "";
+$email=isset($userinfo["email"]) ? $userinfo["email"] : "";
+$admin=isset($userinfo['user_autho']["admin"]) ? $userinfo['user_autho']["admin"] : false;
+$coupon_manager=isset($userinfo['user_autho']["coupon_manager"]) ? $userinfo['user_autho']["coupon_manager"] : false;
+$virtualrun_manager=isset($userinfo['user_autho']["virtualrun_manager"]) ? $userinfo['user_autho']["virtualrun_manager"] : false;
+$brkfund_manager=isset($userinfo['user_autho']["brkfund_manager"]) ? $userinfo['user_autho']["brkfund_manager"] :false;
+$club_manager=isset($userinfo['user_autho']["club_manager"]) ? $userinfo['user_autho']["club_manager"] : false;
 // Include config file
 require_once "config.php";
 require_once "vendor/restdbclass.php";
@@ -93,9 +102,30 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
 <div class="row">
   <div class="col-sm-4">
     <div class="list-group">
-      <span class="list-group-item active"><?php //echo $user_info;?></span>
+      <span class="list-group-item active"><?php echo $name;?></span>
+        <span class="list-group-item active"><?php echo $email;?></span>
       <span class="list-group-item">โทรศัพท์ <?php //echo $telephone;?></span>
-      <a href="reset_password.php" class="list-group-item">เปลี่ยนรหัสผ่าน</a>
+      <?php if($admin){ ?>
+        <span class="list-group-item">คุณคือ Admin ของระบบ</span>
+      <?php }?>
+      <?php if($coupon_manager){ ?>
+        <span class="list-group-item">คุณได้รับสิทธิ์ผู้จัดการระบบคูปองอาหารกลางวัน</span>
+
+      <?php }?>
+      <?php if($virtualrun_manager){ ?>
+        <span class="list-group-item">คุณได้รับสิทธิ์ผู้จัดการระบบ Virtual Run</span>
+
+      <?php }?>
+      <?php if($brkfund_manager){ ?>
+        <span class="list-group-item">คุณได้รับสิทธิ์ผู้จัดการระบบ กองทุน บรข.พัน.ขกท.</span>
+
+      <?php }?>
+      <?php if($club_manager){ ?>
+        <span class="list-group-item">คุณได้รับสิทธิ์ผู้จัดการระบบชมรม พัน.ขกท.</span>
+
+      <?php }?>
+
+      <a href="reset_password.php?userid=<?php echo $userid;?>" class="list-group-item">เปลี่ยนรหัสผ่าน</a>
     </div>
   </div><!-- /.col-sm-4 -->
   <div class="col-sm-4">

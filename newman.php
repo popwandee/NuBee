@@ -77,12 +77,16 @@ $rank = isset($_POST['rank']) ? htmlspecialchars(strip_tags($_POST['rank'])) : "
 $name = isset($_POST['name']) ? htmlspecialchars(strip_tags($_POST['name'])) : "";
 $lastname = isset($_POST['lastname']) ? htmlspecialchars(strip_tags($_POST['lastname'])) : "";
 $org = isset($_POST['org']) ? htmlspecialchars(strip_tags($_POST['org'])) : "";
-$government_id = isset($_POST['government_id']) ? htmlspecialchars(strip_tags($_POST['government_id'])) : "";
-$national_id = isset($_POST['national_id']) ? htmlspecialchars(strip_tags($_POST['national_id'])) : "";
-
+$telephone = isset($_POST['telephone']) ? htmlspecialchars(strip_tags($_POST['telephone'])) : "";
+$idline = isset($_POST['idline']) ? htmlspecialchars(strip_tags($_POST['idline'])) : "";
+$twitter = isset($_POST['twitter']) ? htmlspecialchars(strip_tags($_POST['twitter'])) : "";
+$email = isset($_POST['email']) ? htmlspecialchars(strip_tags($_POST['email'])) : "";
+$password = isset($_POST['password']) ? htmlspecialchars(strip_tags($_POST['password'])) : "";
+$hash_password = password_hash($password, PASSWORD_DEFAULT);
 // นำข้อมูลเข้าเก็บในฐานข้อมูล
 $collectionName = "mibnpeople";
-$obj =   '{"id":"'.$man_id.'","rank":"'.$rank.'","name":"'.$name.'", "lastname":"'.$lastname.'","org":"'.$org.'","government_id":"'.$government_id.'", "national_id":"'.$national_id.'"}';
+$obj =   '{"id":"'.$man_id.'","rank":"'.$rank.'","name":"'.$name.'", "lastname":"'.$lastname.'","org":"'.$org.'",
+    "telephone":"'.$telephone.'", "idline":"'.$idline.'", "twitter":"'.$twitter.'", "email":"'.$email.'", "password":"'.$password.'"}';
 
 $coupon = new RestDB();
 $returnValue = $coupon->insertDocument($collectionName,$obj);

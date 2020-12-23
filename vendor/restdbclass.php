@@ -101,9 +101,9 @@ class RestDB {
         }
 
         $post_vars = json_encode($obj);
-
+print_r($post_vars);
         $url = $this->apiurl.$collectionName.'/'.$objectId;
-
+echo "<br>URL is ".$url;
         $ch = curl_init($url);
 
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json','x-apikey:'.self::APIKEY) );

@@ -8,7 +8,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 }
 $userinfo = isset($_SESSION["userinfo"]) ? $_SESSION["userinfo"] : "";
-
+$userid = isset($userinfo["userid"]) ? $userinfo["userid"] : "";
 // Include config file
 require_once "config.php";
 require_once "vendor/restdbclass.php";
@@ -83,6 +83,7 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
             <td>ค้นหาวันที่ (yyyy-mm-dd)</td>
             <td><input type='text' name='dateGetCoupon' class='form-control' /></td>
             <td><input type='submit' value='ค้นหา' class='btn btn-primary' /></td>
+            <td><a href="reset_password.php?userid=<?php echo $userid;?>">เปลี่ยนรหัสผ่าน</a></td>
         </tr>
     </table>
 </form>

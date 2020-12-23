@@ -93,12 +93,12 @@ if(isset($objectId)&isset($_POST['submit'])){
         $rank = isset($_POST['rank']) ? $_POST['rank'] : "";
         $name = isset($_POST['name']) ? $_POST['name'] : "";
         $lastname = isset($_POST['lastname']) ? $_POST['lastname'] : "";
-        $government_id = isset($_POST['government_id']) ? $_POST['government_id'] : "";
-        $national_id = isset($_POST['national_id']) ? $_POST['national_id'] : "";
+        $telephone = isset($_POST['telephone']) ? $_POST['telephone'] : "";
+        $idline = isset($_POST['idline']) ? $_POST['idline'] : "";
+        $twitter = isset($_POST['twitter']) ? $_POST['twitter'] : "";
         $brkfund_id = isset($_POST['brkfund_id']) ? $_POST['brkfund_id'] : "";
         $org = isset($_POST['org']) ? $_POST['org'] : "";
         $email = isset($_POST['email']) ? $_POST['email'] : "";
-        $password = isset($_POST['password']) ? $_POST['password'] : "";
         if(isset($_POST['isadmin'])){
             $isadmin = $_POST['isadmin'];
             if($isadmin){$isadmin=true;}else{$isadmin=false;}
@@ -123,8 +123,9 @@ if(isset($objectId)&isset($_POST['submit'])){
         "rank" => $rank,
         "name" => $name,
         "lastname" => $lastname,
-                        "government_id" => $government_id,
-                        "national_id" => $national_id,
+                        "telephone" => $telephone,
+                        "idline" => $idline,
+                        "twitter" => $twitter,
                         "org" => $org,
                         "brkfund_id" => $brkfund_id,
                         "admin" => $isadmin,
@@ -132,8 +133,7 @@ if(isset($objectId)&isset($_POST['submit'])){
                         "virtualrun_manager" => $virtualrun_manager,
                         "brkfund_manager" => $brkfund_manager,
                         "club_manager" => $club_manager,
-                        "email" => $email,
-                        "password" => $password);
+                        "email" => $email);
 
         $updateman = new RestDB;
         $res = $updateman->updateDocument($collectionName, $objectId, $obj);
@@ -162,8 +162,9 @@ if(isset($objectId)&isset($_POST['submit'])){
                 $rank = isset($rec['rank']) ? $rec['rank'] : "";
                 $name = isset($rec['name']) ? $rec['name'] : "";
                 $lastname = isset($rec['lastname']) ? $rec['lastname'] : "";
-                $government_id = isset($rec['government_id']) ? $rec['government_id'] : "";
-                $national_id = isset($rec['national_id']) ? $rec['national_id'] : "";
+                $telephone = isset($rec['telephone']) ? $rec['telephone'] : "";
+                $idline = isset($rec['idline']) ? $rec['idline'] : "";
+                $twitter = isset($rec['twitter']) ? $rec['twitter'] : "";
                 $brkfund_id = isset($rec['brkfund_id']) ? $rec['brkfund_id'] : "";
                 $org = isset($rec['org']) ? $rec['org'] : "";
                 $isadmin = isset($rec['isadmin']) ? $rec['isadmin'] : false;
@@ -172,7 +173,6 @@ if(isset($objectId)&isset($_POST['submit'])){
                 $brkfund_manager = isset($rec['brkfund_manager']) ? $rec['brkfund_manager'] : false;
                 $club_manager = isset($rec['club_manager']) ? $rec['club_manager'] : false;
                 $email = isset($rec['email']) ? $rec['email'] : "";
-                $password = isset($rec['password']) ? $rec['password'] : "";
 
                 // show form
                 ?>
@@ -211,14 +211,20 @@ if(isset($objectId)&isset($_POST['submit'])){
   </div>
   <div class="form-group row">
       <div class="form-group col-md-6">
-      <label for="government_id" class="col-sm-2 col-form-label">government_id</label>
-      <input type="text" class="form-control" name ="government_id" id="government_id" value="<?php echo $government_id;?>" maxlength="10" size="10">
+      <label for="telephone" class="col-sm-2 col-form-label">Telephone</label>
+      <input type="text" class="form-control" name ="telephone" id="telephone" value="<?php echo $telephone;?>" maxlength="10" size="10">
     </div>
   </div>
   <div class="form-group row">
       <div class="form-group col-md-6">
-    <label for="national_id" class="col-sm-2 col-form-label">national_id</label>
-        <input type="text" class="form-control" name ="national_id" id="national_id" value="<?php echo $national_id;?>" maxlength="10" size="10">
+    <label for="idline" class="col-sm-2 col-form-label">ID Line</label>
+        <input type="text" class="form-control" name ="idline" id="idline" value="<?php echo $idline;?>" maxlength="10" size="10">
+    </div>
+  </div>
+  <div class="form-group row">
+      <div class="form-group col-md-6">
+    <label for="twitter" class="col-sm-2 col-form-label">Twitter</label>
+        <input type="text" class="form-control" name ="twitter" id="twitter" value="<?php echo $twitter;?>" maxlength="10" size="10">
     </div>
   </div>
   <div class="form-group row">
@@ -231,10 +237,6 @@ if(isset($objectId)&isset($_POST['submit'])){
     <div class="form-group col-md-3">
       <label for="Email">Email</label>
       <input type="email" class="form-control" name="email" id="email" value="<?php echo $email;?>" placeholder="Email">
-    </div>
-    <div class="form-group col-md-3">
-      <label for="password">Password</label>
-      <input type="password" class="form-control" id="password" value="<?php echo $password;?>" placeholder="password">
     </div>
   </div>
   <div class="form-group row">
@@ -310,8 +312,9 @@ echo "<tr>";
     echo "<th>ลำดับ</th>";
     echo "<th>ยศ ชื่อ สกุล</th>";
     echo "<th>สังกัด</th>";
-    echo "<th>หมายเลขข้าราชการ</th>";
-    echo "<th>หมายเลขประชาชน</th>";
+    echo "<th>Telephone</th>";
+    echo "<th>ID Line</th>";
+    echo "<th>Twitter</th>";
     echo "<th>เลขสมาชิก บรข.</th>";
     echo "<th>Email</th>";
     echo "<th>Admin</th><th>Coupon Manager</th><th>Vrun Manager</th><th>BRK Manager</th><th>Club Manager</th>";
@@ -323,8 +326,9 @@ foreach($res as $rec){
     $id=$rec['id'];
     $name=$rec['rank'].' '.$rec['name'].' '.$rec['lastname'];
     $org=$rec['org'];
-    $government_id=$rec['government_id'];
-    $national_id=$rec['national_id'];
+    $telephone=$rec['telephone'];
+    $idline=$rec['idline'];
+    $twitter=$rec['twitter'];
     $brkfund_id = isset($rec['brkfund_id']) ? $rec['brkfund_id'] : "";
     $username = isset($rec['username']) ? $rec['username'] : "";
     $isadmin = isset($rec['admin']) ? $rec['admin'] : false;
@@ -333,7 +337,6 @@ foreach($res as $rec){
     $brkfund_manager = isset($rec['brkfund_manager']) ? $rec['brkfund_manager'] : false;
     $club_manager = isset($rec['club_manager']) ? $rec['club_manager'] : false;
     $email = isset($rec['email']) ? $rec['email'] : "";
-    $password = isset($rec['password']) ? $rec['password'] : "";
 // creating new table row per record
 
 echo "<tr>"; ?>
@@ -341,8 +344,9 @@ echo "<tr>"; ?>
         <td><?php echo $id;?></td>
         <td><?php echo $name;?></td>
         <td><?php echo $org;?></td>
-        <td><?php echo $government_id;?></td>
-        <td><?php echo $national_id;?></td>
+        <td><?php echo $telephone;?></td>
+        <td><?php echo $idline;?></td>
+        <td><?php echo $twitter;?></td>
         <td><?php echo $brkfund_id;?></td>
         <td><?php echo $email;?></td>
         <td><input type="checkbox" name="isadmin" <?php if($isadmin){ echo "checked";}?>></td>

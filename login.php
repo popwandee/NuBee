@@ -56,7 +56,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $email=$rec['email'];
         $hashed_password=$rec['password'];
         $userinfo['name']=$rec['rank'].' '.$rec['name'].' '.$rec['lastname'];
+        $userinfo['userid']=$rec['_id'];
         $userinfo['email']=$rec['email'];
+        $userinfo['telephone']=$rec['telephone'];
         $userinfo['user_autho']['admin']=$rec['admin'];
         $userinfo['user_autho']['coupon_manager']=$rec['coupon_manager'];
         $userinfo['user_autho']['virtualrun_manager']=$rec['virtualrun_manager'];

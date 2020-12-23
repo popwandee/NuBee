@@ -105,9 +105,10 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
         echo "<th>ลำดับ</th>";
         echo "<th>ยศ ชื่อ สกุล</th>";
         echo "<th>สังกัด</th>";
-        echo "<th>หมายเลขข้าราชการ</th>";
-        echo "<th>หมายเลขประชาชน</th>";
-        echo "<th>เลขสมาชิก บรข.</th>";
+        echo "<th>โทรศัพท์</th>";
+        echo "<th>ID Line</th>";
+        echo "<th>twitter</th>";
+        echo "<th>บรข.พัน.ขกท.</th>";
         echo "<th>Email</th>";
         echo "<th>Admin</th><th>Coupon Manager</th><th>Vrun Manager</th><th>BRK Manager</th><th>Club Manager</th>";
 
@@ -121,17 +122,17 @@ foreach($res as $rec){
         $id=$rec['id'];
         $name=$rec['rank'].' '.$rec['name'].' '.$rec['lastname'];
         $org=$rec['org'];
-        $government_id=$rec['government_id'];
-        $national_id=$rec['national_id'];
+        $telephone=$rec['telephone'];
+        $idline=$rec['idline'];
+        $twitter=$rec['twitter'];
         $brkfund_id = isset($rec['brkfund_id']) ? $rec['brkfund_id'] : "";
-        $username = isset($rec['username']) ? $rec['username'] : "";
+        $email = isset($rec['email']) ? $rec['email'] : "";
         $isadmin = isset($rec['admin']) ? $rec['admin'] : false;
         $coupon_manager = isset($rec['coupon_manager']) ? $rec['coupon_manager'] : false;
         $virtualrun_manager = isset($rec['virtualrun_manager']) ? $rec['virtualrun_manager'] : false;
         $brkfund_manager = isset($rec['brkfund_manager']) ? $rec['brkfund_manager'] : false;
         $club_manager = isset($rec['club_manager']) ? $rec['club_manager'] : false;
-        $email = isset($rec['email']) ? $rec['email'] : "";
-        $password = isset($rec['password']) ? $rec['password'] : "";
+        
     // creating new table row per record
 
     echo "<tr>"; ?>
@@ -139,8 +140,9 @@ foreach($res as $rec){
             <td><?php echo $id;?></td>
             <td><?php echo $name;?></td>
             <td><?php echo $org;?></td>
-            <td><?php echo $government_id;?></td>
-            <td><?php echo $national_id;?></td>
+            <td><?php echo $telephone;?></td>
+            <td><?php echo $idline;?></td>
+            <td><?php echo $twitter;?></td>
             <td><?php echo $brkfund_id;?></td>
             <td><?php echo $email;?></td>
             <td><input type="checkbox" name="isadmin" <?php if($isadmin){ echo "checked";}?>></td>
@@ -167,17 +169,18 @@ if($userinfo['user_autho']['admin']=='admin'){
     <table class='table table-hover table-responsive table-bordered'>
         <tr align='center'>
             <td>ลำดับที่</td><td>ยศ</td><td>ชื่อ</td><td>นามสกุล</td><td>สังกัด</td>
-            <td>หมายเลขข้าราชการ</td><td>หมายเลขประชาชน</td><td>Email</td><td>Password</td><td>บันทึก</td></tr>
+            <td>Telephone</td><td>ID Line</td><td>Twitter</td><td>Email</td><td>Password</td><td>บันทึก</td></tr>
             <tr>
             <td><input type='text' name='man_id' value='<?php echo $id;?>' class='form-control' /></td>
             <td><input type='text' name='rank' class='form-control' /></td>
             <td><input type='text' name='name' class='form-control' /></td>
             <td><input type='text' name='lastname' class='form-control' /></td>
             <td><input type='text' name='org' class='form-control' /></td>
-            <td><input type='text' name='government_id' class='form-control' /></td>
-            <td><input type='text' name='national_id' class='form-control' /></td>
+            <td><input type='text' name='telephone' class='form-control' /></td>
+            <td><input type='text' name='idline' class='form-control' /></td>
+            <td><input type='text' name='twitter' class='form-control' /></td>
             <td><input type='text' name='email' class='form-control' /></td>
-            <td><input type='text' name='password' class='form-control' /></td>
+            <td><input type='text' name='password' class='form-control' value='123456' /></td>
             <td><input type='submit' value='บันทึก' class='btn btn-primary' /></td>
         </tr>
     </table>
