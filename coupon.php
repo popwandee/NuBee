@@ -1,7 +1,7 @@
 <?php
 // Initialize the session
 session_start();
- 
+
 // Check if the user is logged in, if not then redirect him to login page
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: login.php");
@@ -10,7 +10,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 // Include config file
 require_once "config.php";
 ?>
- 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +21,7 @@ require_once "config.php";
         body{ font: 14px sans-serif; text-align: center; }
     </style>
 </head>
-<body>
+<body>    <?php include 'navigation.php';?>
     <div class="page-header">
         <table><tr><td><img src="mibnlogo.png" width="50"></td><td><h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. ยินดีต้อนรับครับ</h1></td></tr></table>
     </div>

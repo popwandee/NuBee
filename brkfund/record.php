@@ -58,7 +58,7 @@ require '../vendor/cloudinary/cloudinary_php/src/Api.php';
 
 </head>
 <body>
-    <?php include 'navigation.html';?>
+    <?php include '../navigation.php';?>
     <div class="container theme-showcase" role="main">
         <!-- Main jumbotron for a primary marketing message or call to action -->
         <div class="jumbotron">

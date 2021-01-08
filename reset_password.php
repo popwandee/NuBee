@@ -84,6 +84,7 @@ echo "new password is ".$new_password;
     </style>
 </head>
 <body>
+      <?php include 'navigation.php';?>
     <div class="wrapper">
         <h2>Reset Password</h2>
         <p>Please fill out this form to reset your password.</p>
