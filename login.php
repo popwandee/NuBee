@@ -24,14 +24,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty(trim($_POST["email"]))){
         $email_err = "กรุณากรอกข้อมูล Email.";
     } else{
-        $email = trim($_POST["email"]);echo "<br>Email is ".$email;
+        $email = trim($_POST["email"]);
+        //echo "<br>Email is ".$email;
     }
 
     // Check if password is empty
     if(empty(trim($_POST["password"]))){
-        $password_err = "กรุณากรอกข้อมูล password."; echo "<br>empty password, password_err is ".$password_err;
+        $password_err = "กรุณากรอกข้อมูล password.";
+        //echo "<br>empty password, password_err is ".$password_err;
     } else{
-        $password = trim($_POST["password"]);echo "<br>password is ".$password;
+        $password = trim($_POST["password"]);
+        //echo "<br>password is ".$password;
         //$hashed_password = password_hash($password, PASSWORD_DEFAULT);
     }
 
@@ -95,7 +98,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login เข้าสู่ระบบจ่ายคูปองอาหารกลางวัน พัน.ขกท.</title>
+    <title>Smart OFFICE</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <style type="text/css">
         body{ font: 14px sans-serif; }
@@ -103,12 +106,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     </style>
 </head>
 <body>
- <div class="container">
+ <div class="container" align="center" background-color="#3399ff">
  <div class="page-header">
-            <table><tr><td><img src="mibnlogo.png" width="50"></td><td><h2>Login เข้าสู่ระบบจ่ายคูปองอาหารกลางวัน พัน.ขกท.</h2></td></tr></table>
+            <table><tr><td></td><td><h2>Login please!!!</h2></td></tr></table>
         </div>
-    <div class="wrapper">
-
+    <div class="wrapper bg-info" align="left">
+<?php
+$message = isset($_SESSION['message']) ? $_SESSION['message'] : "";
+echo $message;
+?>
         <p>กรุณากรอกข้อมูลเพื่อ login.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
@@ -124,7 +130,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Login">
             </div>
-
+            <div class="wrapper" align="left">
+                <p>ยังไม่มีบัญชีผู้ใช้ <a href="signup.php">สมัครเข้าใช้ระบบ</a></p>
+            </div>
         </form>
     </div>
  </div>

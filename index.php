@@ -135,14 +135,14 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
       </div>
       <div class="panel-body">
 
-        <span class="list-group-item">รวมที่อนุมัติแล้ว <?php //$sum=number_format($sum, 2);echo $sum;?> บาท</span>
+        <span class="list-group-item"> <?php //$sum=number_format($sum, 2);echo $sum;?> บาท</span>
       </div>
     </div>
   </div><!-- /.col-sm-4 -->
   <div class="col-sm-4">
     <div class="panel panel-info">
       <div class="panel-heading">
-        <h3 class="panel-title">ประกาศจากชมรม</h3>
+        <h3 class="panel-title">ประกาศ</h3>
       </div>
       <div class="panel-body">
         ข้อมูล

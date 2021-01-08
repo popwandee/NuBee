@@ -67,13 +67,6 @@ require 'vendor/cloudinary/cloudinary_php/src/Api.php';
             <td><h3>ระบบสารสนเทศเพื่อการสื่อสาร และประชาสัมพันธ์ ภายในหน่วย พัน.ขกท.</h3></td></tr></table>
       </div>
   </div>
- <?php
-$tz_object = new DateTimeZone('Asia/Bangkok');
-         $datetime = new DateTime();
-         $datetime->setTimezone($tz_object);
-         $dateTimeToday = $datetime->format('Y-m-d');
-
-	?>
 
     <!-- container -->
     <div class="container">
@@ -89,7 +82,12 @@ $tz_object = new DateTimeZone('Asia/Bangkok');
 
 	    <!-- PHP code to read records will be here -->
          <?php
-         $message = isset($_GET['message']) ? $_GET['message'] : "";
+         if(isset($_SESSION['message'])){
+             $message = $_SESSION['message'];
+         }else{
+             $message = isset($_GET['message']) ? $_GET['message'] : "";
+         }
+
 	    echo $message;
         $collectionName = "mibnpeople";
         $obj = '{}';
@@ -132,7 +130,7 @@ foreach($res as $rec){
         $virtualrun_manager = isset($rec['virtualrun_manager']) ? $rec['virtualrun_manager'] : false;
         $brkfund_manager = isset($rec['brkfund_manager']) ? $rec['brkfund_manager'] : false;
         $club_manager = isset($rec['club_manager']) ? $rec['club_manager'] : false;
-        
+
     // creating new table row per record
 
     echo "<tr>"; ?>

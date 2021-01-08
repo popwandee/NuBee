@@ -33,7 +33,7 @@ require_once "../vendor/function.php";
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="AFAPS40-CRMA51 Website">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <link rel="icon" href="../mibnlogo.png">
 
     <title>MI Bn Virtualrun</title>
     <!-- Latest compiled and minified CSS -->
@@ -63,6 +63,8 @@ require_once "../vendor/function.php";
     <div class="jumbotron">
       <h1>BRK Fund</h1>
       <p>กองทุนบำรุงขวัญ พัน.ขกท.</p>
+      <table><tr><td><img src="../mibnlogo.png" width="50"></td>
+      <td><h3>ระบบสารสนเทศเพื่อการสื่อสาร และประชาสัมพันธ์ ภายในหน่วย พัน.ขกท.</h3></td></tr></table>
     </div>
 
   <hr>
