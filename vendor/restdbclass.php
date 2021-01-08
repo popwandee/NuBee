@@ -4,17 +4,12 @@
  * Author     : josephtinsley
  * Description: Simple PHP class to be used to interact with databases from RestDB, RestDB.io
  * http://twitter.com/josephtinsley
-* $test = new RestDB();
-* $collectionName = "people";
-*  $obj =  array("name" => "ไพศาล");
-* $return = $test->selectDocument($collectionName, $obj);
-* print_r($return);
 */
 
 class RestDB {
 
     CONST APIDB = 'area51-dfba';
-    CONST APIKEY = '5fd9fb83ff9d670638140649';
+    CONST APIKEY = '';
 
     private $apiurl = '';
 
