@@ -6,4 +6,3 @@ navigation.php
 composer.json
 composer.lock
 LICENSE
-vendor/restdbclass.php
