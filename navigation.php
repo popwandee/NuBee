@@ -1,4 +1,4 @@
-<?php $root_url= "http://" . $_SERVER['HTTP_HOST']."/NuBee";?>
+<?php $root_url= "http://" . $_SERVER['HTTP_HOST'];?>
 <!-- Fixed navbar -->
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container">
