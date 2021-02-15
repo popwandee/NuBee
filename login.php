@@ -4,8 +4,8 @@ session_start();
 
 // Check if the user is already logged in, if yes then redirect him to welcome page
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    //header("location: index.php");
- echo "<br>go to index.php";
+    header("location: listcoupon.php");
+
     exit;
 }
 
@@ -83,6 +83,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         }
       }else{
       $email_err = "ไม่มีข้อมูล Email นี้ครับ";
+      print_r($res);
 }
 
 
@@ -110,31 +111,62 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
  <div class="page-header">
             <table><tr><td></td><td><h2>Login please!!!</h2></td></tr></table>
         </div>
-    <div class="wrapper bg-info" align="left">
-<?php
-$message = isset($_SESSION['message']) ? $_SESSION['message'] : "";
-echo $message;
-?>
-        <p>กรุณากรอกข้อมูลเพื่อ login.</p>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
-                <label>Email</label>
-                <input type="text" name="email" class="form-control" value="<?php echo $email; ?>">
-                <span class="help-block"><?php echo $email_err; ?></span>
-            </div>
-            <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                <label>Password</label>
-                <input type="password" name="password" class="form-control">
-                <span class="help-block"><?php echo $password_err; ?></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Login">
-            </div>
-            <div class="wrapper" align="left">
-                <p>ยังไม่มีบัญชีผู้ใช้ <a href="signup.php">สมัครเข้าใช้ระบบ</a></p>
-            </div>
-        </form>
-    </div>
+<div class="row">
+  <div class="col-md-6">
+      <div class="wrapper bg-info" align="left">
+      <?php
+      $message = isset($_SESSION['message']) ? $_SESSION['message'] : "";
+      echo $message;
+      ?>
+          <p>กรุณากรอกข้อมูลเพื่อ login .</p>
+          <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+              <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
+                  <label>Email</label>
+                  <input type="text" name="email" class="form-control" value="<?php echo $email; ?>">
+                  <span class="help-block"><?php echo $email_err; ?></span>
+              </div>
+              <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+                  <label>Password</label>
+                  <input type="password" name="password" class="form-control">
+                  <span class="help-block"><?php echo $password_err; ?></span>
+              </div>
+              <div class="form-group">
+                  <input type="submit" class="btn btn-primary" value="Login">
+              </div>
+              <div class="wrapper" align="left">
+                  <p>ยังไม่มีบัญชีผู้ใช้ <a href="signup.php">สมัครเข้าใช้ระบบ</a></p>
+              </div>
+          </form>
+      </div>
+  </div>
+  <div class="col-md-6">
+      <div class="wrapper bg-success" align="left">
+      <?php
+      $message = isset($_SESSION['message']) ? $_SESSION['message'] : "";
+      echo $message;
+      ?>
+          <p>กรุณากรอกข้อมูลเพื่อ login. (สำหรับร้านค้า)</p>
+          <form action="ecoupon/merchant.php" method="post">
+              <div class="form-group ">
+                  <label>Email</label>
+                  <input type="text" name="merchant_email" class="form-control">
+              </div>
+              <div class="form-group ">
+                  <label>Password</label>
+                  <input type="password" name="merchant_password" class="form-control">
+              </div>
+              <div class="form-group">
+                  <input type="submit" class="btn btn-primary" value="Login">
+              </div>
+              <div class="wrapper" align="left">
+                  <p>ยังไม่มีบัญชีผู้ใช้ <a href="ecoupon/merchant_signup.php">สมัครเข้าใช้ระบบ</a></p>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
+
+
  </div>
 </body>
 </html>

@@ -1,0 +1,14 @@
+RSSreader gpEasy Addon
+by tomasz.wodzinski 
+
+Manual Installation
+-------------------
+Copy into 'Addon' directory of gpEasy.
+Then use gpEasy's 'Manage Plugins' interface to complete install.
+
+Version 1.0.0
+-------------------
+Fully working of RSS Reader based on  SimplePie into gpEasy.
+At 'Special Admin RSSReader' page simply manage your RSS feeds.
+
+Insert page in to menu to get it work for you.

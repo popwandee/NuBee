@@ -1,4 +1,4 @@
-<?php $root_url= "http://" . $_SERVER['HTTP_HOST'];?>
+<?php $root_url= "http://" . $_SERVER['HTTP_HOST']."/NuBee";?>
 <!-- Fixed navbar -->
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container">
@@ -26,7 +26,16 @@
       <li><a href="<?php echo $root_url; ?>/notreturncoupon.php">คูปองที่ยังไม่ส่งคืน</a></li>
       </ul>
      </li>
-
+     <li class="dropdown">
+       <a href="<?php echo $root_url; ?>/listcoupon.php" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+         ระบบคูปองอิเล็กทรอนิกส์ <span class="caret"></span></a>
+       <ul class="dropdown-menu">
+     <li><a href="<?php echo $root_url; ?>/ecoupon/index.php">ระบบคูปอง</a></li>
+     <li><a href="<?php echo $root_url; ?>/ecoupon/manage_coupon.php">จัดการคูปอง (แอดมิน)</a></li>
+     <li><a href="<?php echo $root_url; ?>/ecoupon/checkcoupon.php">ตรวจสอบคูปอง</a></li>
+     <li><a href="<?php echo $root_url; ?>/ecoupon/merchant.php">ร้านค้า</a></li>
+     </ul>
+     </li>
      <li class="dropdown">
        <a href="<?php echo $root_url; ?>/brkfund/index.php" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
          กองทุนบำรุงขวัญ พัน.ขกท. <span class="caret"></span></a>

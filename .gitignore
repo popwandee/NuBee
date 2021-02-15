@@ -2,7 +2,6 @@ composer.phar
 !/logs/.gitkeep
 /logs/*
 *.phar
-navigation.php
 composer.json
 composer.lock
 LICENSE
